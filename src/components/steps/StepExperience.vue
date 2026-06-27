@@ -5,7 +5,7 @@
     </p>
 
     <div
-      v-for="exp in cv.experience"
+      v-for="(exp, i) in cv.experience"
       :key="exp.id"
       class="rounded-lg border border-gray-200 p-4"
     >
@@ -13,12 +13,13 @@
         <span class="text-xs font-semibold text-gray-400">
           {{ exp.role || 'Nova experiência' }}
         </span>
-        <button
-          class="text-xs text-red-500 hover:text-red-700"
-          @click="cv.removeExperience(exp.id)"
-        >
-          Remover
-        </button>
+        <ItemActions
+          :can-up="i > 0"
+          :can-down="i < cv.experience.length - 1"
+          @up="cv.move('experience', exp.id, -1)"
+          @down="cv.move('experience', exp.id, 1)"
+          @remove="cv.removeExperience(exp.id)"
+        />
       </div>
 
       <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -49,8 +50,18 @@
         </div>
       </div>
 
+      <p v-if="dateError(exp)" class="mt-1 text-xs text-red-500">
+        A data de fim é anterior à de início.
+      </p>
+
       <label :for="`exp-current-${exp.id}`" class="mt-3 flex items-center gap-2 text-sm text-gray-600">
-        <input :id="`exp-current-${exp.id}`" v-model="exp.current" type="checkbox" class="rounded border-gray-300" />
+        <input
+          :id="`exp-current-${exp.id}`"
+          v-model="exp.current"
+          type="checkbox"
+          class="rounded border-gray-300"
+          @change="exp.current && (exp.endDate = '')"
+        />
         Trabalho aqui actualmente
       </label>
 
@@ -66,7 +77,7 @@
       </div>
     </div>
 
-    <button class="btn-ghost w-full justify-center" @click="cv.addExperience()">
+    <button type="button" class="btn-ghost w-full justify-center" @click="cv.addExperience()">
       + Adicionar experiência
     </button>
   </div>
@@ -74,5 +85,12 @@
 
 <script setup>
 import { useCvStore } from '@/stores/cv'
+import ItemActions from '@/components/ItemActions.vue'
+
 const cv = useCvStore()
+
+// Datas em formato "YYYY-MM" comparam-se lexicograficamente.
+function dateError(exp) {
+  return !exp.current && exp.startDate && exp.endDate && exp.endDate < exp.startDate
+}
 </script>

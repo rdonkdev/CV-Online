@@ -19,11 +19,14 @@
       </div>
 
       <!-- Indicadores clicáveis -->
-      <nav class="mt-4 flex justify-between">
+      <nav class="mt-4 flex justify-between" aria-label="Passos do formulário">
         <button
           v-for="(s, i) in steps"
           :key="s.key"
-          class="flex flex-1 flex-col items-center gap-1 text-xs"
+          type="button"
+          class="flex flex-1 flex-col items-center gap-1 text-[10px]"
+          :aria-current="i === current ? 'step' : undefined"
+          :aria-label="`Passo ${i + 1}: ${s.label}`"
           @click="current = i"
         >
           <span
@@ -38,7 +41,7 @@
           >
             {{ i < current ? '✓' : i + 1 }}
           </span>
-          <span :class="i === current ? 'text-blue-600' : 'text-gray-400'">
+          <span class="max-w-full truncate" :class="i === current ? 'text-blue-600' : 'text-gray-400'">
             {{ s.short }}
           </span>
         </button>
@@ -52,11 +55,11 @@
 
     <!-- Navegação -->
     <div class="mt-6 flex items-center justify-between border-t border-gray-100 pt-4">
-      <button class="btn-ghost" :disabled="current === 0" @click="prev">
+      <button type="button" class="btn-ghost" :disabled="current === 0" @click="prev">
         ← Anterior
       </button>
 
-      <button v-if="current < steps.length - 1" class="btn-primary" @click="next">
+      <button v-if="current < steps.length - 1" type="button" class="btn-primary" @click="next">
         Seguinte →
       </button>
 
@@ -64,10 +67,10 @@
       <div v-else class="flex items-center gap-2">
         <template v-if="confirming">
           <span class="text-xs text-gray-500">Apagar tudo?</span>
-          <button class="btn-ghost text-red-600 hover:bg-red-50" @click="doReset">Sim</button>
-          <button class="btn-ghost" @click="confirming = false">Cancelar</button>
+          <button type="button" class="btn-ghost text-red-600 hover:bg-red-50" @click="doReset">Sim</button>
+          <button type="button" class="btn-ghost" @click="confirming = false">Cancelar</button>
         </template>
-        <button v-else class="btn-ghost text-red-600 hover:bg-red-50" @click="confirming = true">
+        <button type="button" class="btn-ghost text-red-600 hover:bg-red-50" @click="confirming = true">
           Limpar tudo
         </button>
       </div>
@@ -82,6 +85,9 @@ import StepPersonal from '@/components/steps/StepPersonal.vue'
 import StepExperience from '@/components/steps/StepExperience.vue'
 import StepEducation from '@/components/steps/StepEducation.vue'
 import StepSkills from '@/components/steps/StepSkills.vue'
+import StepLanguages from '@/components/steps/StepLanguages.vue'
+import StepCertifications from '@/components/steps/StepCertifications.vue'
+import StepProjects from '@/components/steps/StepProjects.vue'
 
 const cv = useCvStore()
 const current = ref(0)
@@ -89,8 +95,11 @@ const current = ref(0)
 const steps = [
   { key: 'personal', label: 'Dados pessoais', short: 'Pessoal', component: StepPersonal },
   { key: 'experience', label: 'Experiência profissional', short: 'Exp.', component: StepExperience },
-  { key: 'education', label: 'Educação', short: 'Educação', component: StepEducation },
+  { key: 'education', label: 'Educação', short: 'Educ.', component: StepEducation },
   { key: 'skills', label: 'Competências', short: 'Skills', component: StepSkills },
+  { key: 'languages', label: 'Idiomas', short: 'Idiomas', component: StepLanguages },
+  { key: 'certifications', label: 'Certificações', short: 'Cert.', component: StepCertifications },
+  { key: 'projects', label: 'Projetos', short: 'Proj.', component: StepProjects },
 ]
 
 function next() {

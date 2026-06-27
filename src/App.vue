@@ -2,13 +2,13 @@
   <div class="app-root min-h-screen bg-gray-100">
     <!-- Barra superior -->
     <header class="screen-only sticky top-0 z-20 border-b border-gray-200 bg-white/80 backdrop-blur">
-      <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
+      <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-y-2 px-4 py-3">
         <div class="flex items-center gap-2">
           <span class="text-xl">📄</span>
           <h1 class="text-lg font-bold text-gray-900">Gerador de CV</h1>
         </div>
 
-        <div class="flex items-center gap-2">
+        <div class="flex flex-wrap items-center justify-end gap-2">
           <!-- Toggle mobile: formulário / preview -->
           <div class="flex rounded-lg border border-gray-300 p-0.5 lg:hidden">
             <button
@@ -28,6 +28,24 @@
           </div>
 
           <button class="btn-ghost" @click="cv.loadSample()">Exemplo</button>
+          <button class="btn-ghost" title="Importar dados de um ficheiro JSON" @click="triggerImport">
+            Importar
+          </button>
+          <button
+            class="btn-ghost"
+            :disabled="cv.isEmpty"
+            title="Guardar os teus dados num ficheiro JSON"
+            @click="exportData"
+          >
+            Guardar
+          </button>
+          <input
+            ref="fileInput"
+            type="file"
+            accept="application/json,.json"
+            class="hidden"
+            @change="importData"
+          />
           <button
             class="btn-primary"
             :disabled="exporting || cv.isEmpty"
@@ -48,6 +66,10 @@
         :class="{ 'hidden lg:block': mobileView !== 'form' }"
       >
         <FormWizard />
+        <p class="mt-3 px-1 text-center text-xs text-gray-400">
+          🔒 Os teus dados ficam apenas neste browser (localStorage) — nada é enviado para servidores.
+          Em computador partilhado, usa "Limpar tudo" ao terminar.
+        </p>
       </section>
 
       <!-- Painel direito: preview -->
@@ -102,6 +124,38 @@ function onExport() {
   const safeName =
     (cv.personal.name || 'cv').trim().toLowerCase().replace(/\s+/g, '-') || 'cv'
   exportPdf(safeName)
+}
+
+// ---- Export / Import dos dados em JSON (portabilidade entre dispositivos) ----
+const fileInput = ref(null)
+
+function exportData() {
+  const blob = new Blob([JSON.stringify(cv.$state, null, 2)], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = 'cv-dados.json'
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
+function triggerImport() {
+  fileInput.value?.click()
+}
+
+function importData(event) {
+  const file = event.target.files?.[0]
+  if (!file) return
+  const reader = new FileReader()
+  reader.onload = () => {
+    try {
+      cv.loadFrom(JSON.parse(reader.result))
+    } catch {
+      alert('Ficheiro inválido — não foi possível importar.')
+    }
+  }
+  reader.readAsText(file)
+  event.target.value = '' // permite reimportar o mesmo ficheiro
 }
 
 // ---- Ajuste automático do zoom do preview à largura disponível ----

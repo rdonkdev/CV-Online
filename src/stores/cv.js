@@ -1,11 +1,13 @@
 import { defineStore } from 'pinia'
 
 const STORAGE_KEY = 'cv-generator:data'
+const DEFAULT_ACCENT = '#2563eb' // blue-600
 
 // Estado inicial (também usado pelo "Limpar tudo")
 function blankState() {
   return {
     template: 'modern',
+    accent: DEFAULT_ACCENT,
     personal: {
       name: '',
       title: '',
@@ -19,31 +21,43 @@ function blankState() {
     experience: [],
     education: [],
     skills: [],
+    languages: [],
+    certifications: [],
+    projects: [],
   }
 }
 
-// Hidrata a partir do localStorage; faz merge com o estado em branco
-// para tolerar versões antigas guardadas sem campos novos.
+// Normaliza qualquer objeto guardado/importado, fazendo merge com o estado em
+// branco para tolerar versões antigas sem campos novos. Usado na hidratação
+// (localStorage) e no import de JSON.
+function mergeState(saved) {
+  const base = blankState()
+  if (!saved || typeof saved !== 'object') return base
+  const arr = (v) => (Array.isArray(v) ? v : [])
+  return {
+    ...base,
+    ...saved,
+    accent: typeof saved.accent === 'string' ? saved.accent : base.accent,
+    personal: { ...base.personal, ...(saved.personal || {}) },
+    experience: arr(saved.experience),
+    education: arr(saved.education),
+    skills: arr(saved.skills),
+    languages: arr(saved.languages),
+    certifications: arr(saved.certifications),
+    projects: arr(saved.projects),
+  }
+}
+
 function loadState() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
-    if (!raw) return blankState()
-    const saved = JSON.parse(raw)
-    const base = blankState()
-    return {
-      ...base,
-      ...saved,
-      personal: { ...base.personal, ...(saved.personal || {}) },
-      experience: Array.isArray(saved.experience) ? saved.experience : [],
-      education: Array.isArray(saved.education) ? saved.education : [],
-      skills: Array.isArray(saved.skills) ? saved.skills : [],
-    }
+    return raw ? mergeState(JSON.parse(raw)) : blankState()
   } catch {
     return blankState()
   }
 }
 
-// id único e estável sem depender de Date.now em loops apertados
+// id único e estável
 let seq = 0
 function uid() {
   seq += 1
@@ -59,12 +73,18 @@ export const useCvStore = defineStore('cv', {
       !s.personal.summary &&
       s.experience.length === 0 &&
       s.education.length === 0 &&
-      s.skills.length === 0,
+      s.skills.length === 0 &&
+      s.languages.length === 0 &&
+      s.certifications.length === 0 &&
+      s.projects.length === 0,
   },
 
   actions: {
     setTemplate(name) {
       this.template = name
+    },
+    setAccent(color) {
+      this.accent = color
     },
 
     // ---- Experiência ----
@@ -106,12 +126,50 @@ export const useCvStore = defineStore('cv', {
       this.skills = this.skills.filter((s) => s.id !== id)
     },
 
+    // ---- Idiomas ----
+    addLanguage() {
+      this.languages.push({ id: uid(), name: '', level: 'Intermédio' })
+    },
+    removeLanguage(id) {
+      this.languages = this.languages.filter((l) => l.id !== id)
+    },
+
+    // ---- Certificações ----
+    addCertification() {
+      this.certifications.push({ id: uid(), name: '', issuer: '', year: '' })
+    },
+    removeCertification(id) {
+      this.certifications = this.certifications.filter((c) => c.id !== id)
+    },
+
+    // ---- Projetos ----
+    addProject() {
+      this.projects.push({ id: uid(), name: '', link: '', description: '' })
+    },
+    removeProject(id) {
+      this.projects = this.projects.filter((p) => p.id !== id)
+    },
+
+    // ---- Reordenar (genérico) ----
+    // collection: nome da array no state; dir: -1 (cima) ou +1 (baixo)
+    move(collection, id, dir) {
+      const arr = this[collection]
+      if (!Array.isArray(arr)) return
+      const i = arr.findIndex((x) => x.id === id)
+      const j = i + dir
+      if (i < 0 || j < 0 || j >= arr.length) return
+      ;[arr[i], arr[j]] = [arr[j], arr[i]]
+    },
+
     // ---- Utilitários ----
     reset() {
       this.$patch(blankState())
     },
     loadSample() {
       this.$patch(sampleData())
+    },
+    loadFrom(saved) {
+      this.$patch(mergeState(saved))
     },
     persist() {
       try {
@@ -127,6 +185,7 @@ export const useCvStore = defineStore('cv', {
 function sampleData() {
   return {
     template: 'modern',
+    accent: DEFAULT_ACCENT,
     personal: {
       name: 'Ana Marques',
       title: 'Frontend Developer',
@@ -176,6 +235,22 @@ function sampleData() {
       { id: uid(), name: 'TypeScript', level: 4 },
       { id: uid(), name: 'Tailwind CSS', level: 4 },
       { id: uid(), name: 'Node.js', level: 3 },
+    ],
+    languages: [
+      { id: uid(), name: 'Português', level: 'Nativo' },
+      { id: uid(), name: 'Inglês', level: 'Avançado' },
+      { id: uid(), name: 'Espanhol', level: 'Intermédio' },
+    ],
+    certifications: [
+      { id: uid(), name: 'Professional Scrum Master I', issuer: 'Scrum.org', year: '2023' },
+    ],
+    projects: [
+      {
+        id: uid(),
+        name: 'Gerador de CV',
+        link: 'github.com/anamarques/cv',
+        description: 'App Vue 3 para criar CVs com export para PDF e múltiplos templates.',
+      },
     ],
   }
 }

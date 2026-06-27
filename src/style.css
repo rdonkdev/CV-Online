@@ -31,10 +31,42 @@
     @apply mb-1 block text-xs font-medium text-gray-600;
   }
 
+  /* Botão-ícone pequeno (reordenar, etc.) */
+  .icon-btn {
+    @apply flex h-6 w-6 items-center justify-center rounded border border-gray-300 text-xs
+           text-gray-500 transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30;
+  }
+
   /* Título de secção dentro dos templates de CV */
   .section-title {
     @apply mb-2 text-xs font-bold uppercase tracking-widest;
   }
+}
+
+/* ---- Cor de acento (definida em .cv-page via --accent) ----
+   Tons derivados com color-mix para funcionar com qualquer cor escolhida. */
+.text-accent {
+  color: var(--accent);
+}
+.bg-accent {
+  background-color: var(--accent);
+}
+.border-accent {
+  border-color: var(--accent);
+}
+/* Tom suave (chip/fundo claro sobre branco) */
+.bg-accent-soft {
+  background-color: color-mix(in srgb, var(--accent) 12%, #fff);
+}
+.text-accent-strong {
+  color: color-mix(in srgb, var(--accent) 75%, #000);
+}
+/* Tom claro para usar sobre fundos escuros (ex.: sidebar do Modern) */
+.text-accent-tint {
+  color: color-mix(in srgb, var(--accent) 55%, #fff);
+}
+.bg-accent-tint {
+  background-color: color-mix(in srgb, var(--accent) 60%, #fff);
 }
 
 /* ---- Impressão / Exportação PDF (texto vetorial + paginação A4 nativa) ---- */

@@ -5,13 +5,13 @@
     </p>
 
     <div
-      v-for="skill in cv.skills"
+      v-for="(skill, i) in cv.skills"
       :key="skill.id"
-      class="flex items-center gap-3 rounded-lg border border-gray-200 p-3"
+      class="flex flex-wrap items-center gap-3 rounded-lg border border-gray-200 p-3"
     >
       <input
         v-model="skill.name"
-        class="input flex-1"
+        class="input min-w-[8rem] flex-1"
         placeholder="ex.: Vue 3"
         aria-label="Nome da competência"
       />
@@ -30,15 +30,16 @@
         />
       </div>
 
-      <button
-        class="text-xs text-red-500 hover:text-red-700"
-        @click="cv.removeSkill(skill.id)"
-      >
-        Remover
-      </button>
+      <ItemActions
+        :can-up="i > 0"
+        :can-down="i < cv.skills.length - 1"
+        @up="cv.move('skills', skill.id, -1)"
+        @down="cv.move('skills', skill.id, 1)"
+        @remove="cv.removeSkill(skill.id)"
+      />
     </div>
 
-    <button class="btn-ghost w-full justify-center" @click="cv.addSkill()">
+    <button type="button" class="btn-ghost w-full justify-center" @click="cv.addSkill()">
       + Adicionar competência
     </button>
   </div>
@@ -46,5 +47,7 @@
 
 <script setup>
 import { useCvStore } from '@/stores/cv'
+import ItemActions from '@/components/ItemActions.vue'
+
 const cv = useCvStore()
 </script>

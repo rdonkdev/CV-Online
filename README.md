@@ -12,13 +12,17 @@ pré-visualização em tempo real e exportação para PDF — tudo no browser, s
 
 ## ✨ Funcionalidades
 
-- **Formulário multi-step** com barra de progresso (Pessoal → Experiência → Educação → Skills)
+- **Formulário multi-step** com barra de progresso e 7 secções: Pessoal, Experiência, Educação, Competências, Idiomas, Certificações e Projetos
 - **Pré-visualização em tempo real** — escreves no formulário, o CV actualiza ao lado
 - **3 templates** com um clique: `Modern`, `Classic`, `Minimal`
-- **Exportação para PDF** em formato A4 (via `html2pdf.js`)
-- **Persistência automática** no `localStorage` — fechas o browser e os dados continuam lá
+- **Cor de acento** configurável (presets + cor personalizada)
+- **Reordenar** qualquer item com setas ↑↓ (a ordem importa num CV)
+- **Exportação para PDF** com texto vetorial real (selecionável e legível por ATS) via impressão nativa, com paginação A4 automática
+- **Export / Import dos dados em JSON** — leva o teu CV entre dispositivos
+- **Persistência automática** no `localStorage` (com debounce)
+- **Acessível** — labels associados, `aria-*`, navegação por teclado
 - **Responsivo** — no mobile alternas entre formulário e preview
-- **Dados de exemplo** num clique para experimentar rapidamente
+- **Testado** — testes unitários com Vitest (`npm test`)
 
 ---
 
@@ -27,7 +31,8 @@ pré-visualização em tempo real e exportação para PDF — tudo no browser, s
 - [Vue 3](https://vuejs.org/) + [Vite](https://vitejs.dev/)
 - [Pinia](https://pinia.vuejs.org/) — estado central
 - [Tailwind CSS](https://tailwindcss.com/) — estilo
-- [html2pdf.js](https://github.com/eKoopmans/html2pdf.js) — exportação PDF
+- Impressão nativa do browser (`window.print()` + `@media print`) — exportação PDF
+- [Vitest](https://vitest.dev/) — testes unitários
 
 ---
 
@@ -86,6 +91,9 @@ O projecto é 100% estático — qualquer um destes serviços liga directamente 
 
 ## 💡 Notas
 
-- A exportação captura o elemento `#cv-preview` exactamente como aparece no ecrã,
-  por isso o que vês é o que sai no PDF.
-- Para melhor qualidade, o `html2canvas` usa `scale: 2`.
+- A exportação usa a **impressão nativa** do browser: o "Exportar PDF" abre o diálogo de
+  impressão → escolhe "Guardar como PDF". O resultado tem texto vetorial real (não uma
+  imagem), por isso é selecionável e legível por sistemas ATS.
+- O nome de ficheiro sugerido vem de `document.title` (respeitado de forma fiável no Chrome).
+- O template `Modern` (duas colunas) é ideal para 1 página; para CVs longos, `Classic` e
+  `Minimal` (coluna única) paginam de forma mais robusta.

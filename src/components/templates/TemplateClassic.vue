@@ -1,17 +1,13 @@
 <template>
-  <div class="cv-page bg-white p-12 font-serif text-sm text-gray-800">
+  <div class="cv-page bg-white p-12 font-serif text-sm text-gray-800" :style="{ '--accent': cv.accent }">
     <!-- Cabeçalho centrado -->
-    <header class="border-b-2 border-gray-800 pb-4 text-center">
+    <header class="border-b-2 border-accent pb-4 text-center">
       <h1 class="text-3xl font-bold uppercase tracking-wide text-gray-900">
         {{ p.name || 'O teu nome' }}
       </h1>
       <p class="mt-1 text-base italic text-gray-600">{{ p.title }}</p>
-      <div class="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs text-gray-500">
-        <span v-if="p.email">{{ p.email }}</span>
-        <span v-if="p.phone">· {{ p.phone }}</span>
-        <span v-if="p.location">· {{ p.location }}</span>
-        <span v-if="p.linkedin">· {{ p.linkedin }}</span>
-        <span v-if="p.website">· {{ p.website }}</span>
+      <div v-if="contactLine" class="mt-3 text-xs text-gray-500">
+        {{ contactLine }}
       </div>
     </header>
 
@@ -45,22 +41,69 @@
       </div>
     </section>
 
+    <section v-if="cv.projects.length" class="mt-6">
+      <h2 class="classic-title">Projetos</h2>
+      <div v-for="pr in cv.projects" :key="pr.id" class="mb-3 break-inside-avoid">
+        <div class="flex items-baseline justify-between gap-2">
+          <span class="font-bold text-gray-900">{{ pr.name }}</span>
+          <span v-if="pr.link" class="break-all text-xs text-gray-500">{{ pr.link }}</span>
+        </div>
+        <p class="mt-1 leading-relaxed text-gray-700">{{ pr.description }}</p>
+      </div>
+    </section>
+
     <section v-if="cv.skills.length" class="mt-6">
       <h2 class="classic-title">Competências</h2>
+      <div class="grid grid-cols-2 gap-x-8 gap-y-1">
+        <div v-for="s in cv.skills" :key="s.id" class="flex items-center justify-between">
+          <span class="text-gray-700">{{ s.name }}</span>
+          <span class="flex gap-0.5">
+            <span
+              v-for="n in 5"
+              :key="n"
+              class="h-1.5 w-1.5 rounded-full"
+              :class="n <= s.level ? 'bg-accent' : 'bg-gray-300'"
+            />
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <section v-if="cv.languages.length" class="mt-6">
+      <h2 class="classic-title">Idiomas</h2>
       <p class="text-gray-700">
-        {{ cv.skills.map((s) => s.name).filter(Boolean).join('  ·  ') }}
+        {{ cv.languages.map((l) => `${l.name} (${l.level})`).join('  ·  ') }}
       </p>
+    </section>
+
+    <section v-if="cv.certifications.length" class="mt-6">
+      <h2 class="classic-title">Certificações</h2>
+      <div v-for="c in cv.certifications" :key="c.id" class="mb-1 flex items-baseline justify-between break-inside-avoid">
+        <span class="text-gray-700"
+          ><span class="font-medium text-gray-900">{{ c.name }}</span
+          ><span v-if="c.issuer" class="italic"> — {{ c.issuer }}</span></span
+        >
+        <span class="text-xs text-gray-500">{{ c.year }}</span>
+      </div>
     </section>
   </div>
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { useCvStore } from '@/stores/cv'
 import { storeToRefs } from 'pinia'
 import { formatMonth as fmt } from '@/utils/format'
 
 const cv = useCvStore()
 const { personal: p } = storeToRefs(cv)
+
+// Junta só os campos preenchidos — evita separadores órfãos quando algum falta.
+const contactLine = computed(() =>
+  [p.value.email, p.value.phone, p.value.location, p.value.linkedin, p.value.website]
+    .filter(Boolean)
+    .join('  ·  ')
+)
 </script>
 
 <style scoped>
