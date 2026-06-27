@@ -25,6 +25,7 @@ pré-visualização em tempo real e exportação para PDF — tudo no browser, s
 - **Persistência automática** no `localStorage` (com debounce)
 - **Undo/redo** das edições (Ctrl+Z / Ctrl+Y) e indicador "Guardado ✓"
 - **Medidor de completude** do CV e onboarding guiado no primeiro uso
+- **PWA / offline** — instalável e funciona sem internet (service worker + cache)
 - **Modo escuro** no editor (o CV mantém-se branco)
 - **Pré-visualização de impressão** in-app antes de exportar
 - **Acessível** — labels associados, `aria-*`, navegação por teclado

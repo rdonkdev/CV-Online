@@ -8,7 +8,7 @@
         <div class="flex items-center gap-2">
           <span class="text-xl">📄</span>
           <h1 class="hidden text-lg font-bold text-gray-900 dark:text-gray-100 sm:block">
-            Gerador de CV
+            CV - Online
           </h1>
           <ProfileSwitcher class="ml-1" />
         </div>
