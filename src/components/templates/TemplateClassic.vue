@@ -11,12 +11,12 @@
       </div>
     </header>
 
-    <section v-if="p.summary" class="mt-6">
+    <section v-if="cv.sections.summary && p.summary" class="mt-6">
       <h2 class="classic-title">Perfil</h2>
       <p class="whitespace-pre-line leading-relaxed text-gray-700">{{ p.summary }}</p>
     </section>
 
-    <section v-if="cv.experience.length" class="mt-6">
+    <section v-if="cv.sections.experience && cv.experience.length" class="mt-6">
       <h2 class="classic-title">Experiência Profissional</h2>
       <div v-for="exp in cv.experience" :key="exp.id" class="mb-4 break-inside-avoid">
         <div class="flex items-baseline justify-between">
@@ -32,7 +32,7 @@
       </div>
     </section>
 
-    <section v-if="cv.education.length" class="mt-6">
+    <section v-if="cv.sections.education && cv.education.length" class="mt-6">
       <h2 class="classic-title">Educação</h2>
       <div v-for="e in cv.education" :key="e.id" class="mb-3 break-inside-avoid">
         <div class="flex items-baseline justify-between">
@@ -43,7 +43,7 @@
       </div>
     </section>
 
-    <section v-if="cv.projects.length" class="mt-6">
+    <section v-if="cv.sections.projects && cv.projects.length" class="mt-6">
       <h2 class="classic-title">Projetos</h2>
       <div v-for="pr in cv.projects" :key="pr.id" class="mb-3 break-inside-avoid">
         <div class="flex items-baseline justify-between gap-2">
@@ -56,7 +56,7 @@
       </div>
     </section>
 
-    <section v-if="cv.skills.length" class="mt-6">
+    <section v-if="cv.sections.skills && cv.skills.length" class="mt-6">
       <h2 class="classic-title">Competências</h2>
       <div class="grid grid-cols-2 gap-x-8 gap-y-1">
         <div v-for="s in cv.skills" :key="s.id" class="flex items-center justify-between">
@@ -73,14 +73,14 @@
       </div>
     </section>
 
-    <section v-if="cv.languages.length" class="mt-6">
+    <section v-if="cv.sections.languages && cv.languages.length" class="mt-6">
       <h2 class="classic-title">Idiomas</h2>
       <p class="text-gray-700">
         {{ cv.languages.map((l) => `${l.name} (${l.level})`).join('  ·  ') }}
       </p>
     </section>
 
-    <section v-if="cv.certifications.length" class="mt-6">
+    <section v-if="cv.sections.certifications && cv.certifications.length" class="mt-6">
       <h2 class="classic-title">Certificações</h2>
       <div v-for="c in cv.certifications" :key="c.id" class="mb-1 flex items-baseline justify-between break-inside-avoid">
         <span class="text-gray-700"

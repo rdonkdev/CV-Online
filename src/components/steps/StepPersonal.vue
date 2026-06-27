@@ -51,7 +51,10 @@
     </div>
 
     <div>
-      <label for="p-summary" class="label">Resumo / Perfil</label>
+      <div class="mb-1 flex items-center justify-between">
+        <label for="p-summary" class="label mb-0">Resumo / Perfil</label>
+        <SectionToggle v-model="cv.sections.summary" label="Mostrar ou ocultar o Resumo no CV" class="!bg-transparent !px-0 !py-0" />
+      </div>
       <textarea
         id="p-summary"
         v-model="p.summary"
@@ -67,8 +70,10 @@
 import { computed } from 'vue'
 import { useCvStore } from '@/stores/cv'
 import { storeToRefs } from 'pinia'
+import SectionToggle from '@/components/SectionToggle.vue'
 
-const { personal: p } = storeToRefs(useCvStore())
+const cv = useCvStore()
+const { personal: p } = storeToRefs(cv)
 
 // Vazio é considerado válido (campo opcional); só assinala formato errado.
 const emailValid = computed(

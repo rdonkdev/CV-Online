@@ -1,5 +1,7 @@
 <template>
   <div class="space-y-4">
+    <SectionToggle v-model="cv.sections.languages" label="Mostrar ou ocultar os Idiomas no CV" />
+
     <p v-if="!cv.languages.length" class="rounded-lg bg-gray-50 p-6 text-center text-sm text-gray-400">
       Ainda sem idiomas. Adiciona o primeiro.
     </p>
@@ -37,6 +39,7 @@
 <script setup>
 import { useCvStore } from '@/stores/cv'
 import ItemActions from '@/components/ItemActions.vue'
+import SectionToggle from '@/components/SectionToggle.vue'
 
 const cv = useCvStore()
 const LEVELS = ['Básico', 'Intermédio', 'Avançado', 'Nativo']

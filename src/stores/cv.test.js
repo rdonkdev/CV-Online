@@ -44,6 +44,15 @@ describe('cv store', () => {
     expect(cv.accent).toBe('#2563eb')
   })
 
+  it('secções estão visíveis por defeito e merge preserva defaults', () => {
+    const cv = useCvStore()
+    expect(cv.sections.experience).toBe(true)
+    expect(cv.sections.projects).toBe(true)
+    cv.loadFrom({ sections: { experience: false } })
+    expect(cv.sections.experience).toBe(false) // valor importado
+    expect(cv.sections.skills).toBe(true) // default preservado
+  })
+
   it('loadSample() preenche todas as secções', () => {
     const cv = useCvStore()
     cv.loadSample()

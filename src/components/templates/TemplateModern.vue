@@ -31,7 +31,7 @@
         </p>
       </div>
 
-      <div v-if="cv.skills.length" class="mt-8">
+      <div v-if="cv.sections.skills && cv.skills.length" class="mt-8">
         <h2 class="section-title text-accent-tint">Competências</h2>
         <div class="space-y-3">
           <div v-for="s in cv.skills" :key="s.id" class="break-inside-avoid">
@@ -43,7 +43,7 @@
         </div>
       </div>
 
-      <div v-if="cv.languages.length" class="mt-8">
+      <div v-if="cv.sections.languages && cv.languages.length" class="mt-8">
         <h2 class="section-title text-accent-tint">Idiomas</h2>
         <ul class="space-y-1 text-xs">
           <li v-for="l in cv.languages" :key="l.id" class="flex justify-between break-inside-avoid">
@@ -53,7 +53,7 @@
         </ul>
       </div>
 
-      <div v-if="cv.education.length" class="mt-8">
+      <div v-if="cv.sections.education && cv.education.length" class="mt-8">
         <h2 class="section-title text-accent-tint">Educação</h2>
         <div v-for="e in cv.education" :key="e.id" class="mb-4 break-inside-avoid text-xs">
           <p class="font-semibold text-white">{{ e.degree }}</p>
@@ -66,12 +66,12 @@
 
     <!-- Coluna principal -->
     <main class="flex-1 p-8">
-      <section v-if="p.summary" class="mb-6">
+      <section v-if="cv.sections.summary && p.summary" class="mb-6">
         <h2 class="section-title text-slate-800">Perfil</h2>
         <p class="whitespace-pre-line leading-relaxed text-gray-600">{{ p.summary }}</p>
       </section>
 
-      <section v-if="cv.experience.length" class="mb-6">
+      <section v-if="cv.sections.experience && cv.experience.length" class="mb-6">
         <h2 class="section-title text-slate-800">Experiência</h2>
         <div v-for="exp in cv.experience" :key="exp.id" class="relative mb-5 break-inside-avoid border-l-2 border-slate-200 pl-4">
           <span class="absolute -left-[5px] top-1 h-2 w-2 rounded-full bg-accent" />
@@ -88,7 +88,7 @@
         </div>
       </section>
 
-      <section v-if="cv.projects.length" class="mb-6">
+      <section v-if="cv.sections.projects && cv.projects.length" class="mb-6">
         <h2 class="section-title text-slate-800">Projetos</h2>
         <div v-for="pr in cv.projects" :key="pr.id" class="mb-4 break-inside-avoid">
           <div class="flex items-baseline justify-between gap-2">
@@ -101,7 +101,7 @@
         </div>
       </section>
 
-      <section v-if="cv.certifications.length">
+      <section v-if="cv.sections.certifications && cv.certifications.length">
         <h2 class="section-title text-slate-800">Certificações</h2>
         <div v-for="c in cv.certifications" :key="c.id" class="mb-2 flex items-baseline justify-between break-inside-avoid">
           <span class="text-gray-700"

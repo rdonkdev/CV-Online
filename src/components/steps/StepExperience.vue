@@ -1,5 +1,7 @@
 <template>
   <div class="space-y-4">
+    <SectionToggle v-model="cv.sections.experience" label="Mostrar ou ocultar a Experiência no CV" />
+
     <p v-if="!cv.experience.length" class="rounded-lg bg-gray-50 p-6 text-center text-sm text-gray-400">
       Ainda sem experiência. Adiciona a primeira.
     </p>
@@ -87,6 +89,7 @@
 <script setup>
 import { useCvStore } from '@/stores/cv'
 import ItemActions from '@/components/ItemActions.vue'
+import SectionToggle from '@/components/SectionToggle.vue'
 
 const cv = useCvStore()
 

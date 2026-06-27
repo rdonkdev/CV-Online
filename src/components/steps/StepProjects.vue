@@ -1,5 +1,7 @@
 <template>
   <div class="space-y-4">
+    <SectionToggle v-model="cv.sections.projects" label="Mostrar ou ocultar os Projetos no CV" />
+
     <p v-if="!cv.projects.length" class="rounded-lg bg-gray-50 p-6 text-center text-sm text-gray-400">
       Ainda sem projetos. Adiciona o primeiro.
     </p>
@@ -55,6 +57,7 @@
 <script setup>
 import { useCvStore } from '@/stores/cv'
 import ItemActions from '@/components/ItemActions.vue'
+import SectionToggle from '@/components/SectionToggle.vue'
 
 const cv = useCvStore()
 </script>

@@ -8,6 +8,16 @@ function blankState() {
   return {
     template: 'modern',
     accent: DEFAULT_ACCENT,
+    // Visibilidade de cada secção no CV (não apaga dados, só esconde no output)
+    sections: {
+      summary: true,
+      experience: true,
+      education: true,
+      skills: true,
+      languages: true,
+      certifications: true,
+      projects: true,
+    },
     personal: {
       name: '',
       title: '',
@@ -38,6 +48,7 @@ function mergeState(saved) {
     ...base,
     ...saved,
     accent: typeof saved.accent === 'string' ? saved.accent : base.accent,
+    sections: { ...base.sections, ...(saved.sections || {}) },
     personal: { ...base.personal, ...(saved.personal || {}) },
     experience: arr(saved.experience),
     education: arr(saved.education),
@@ -186,6 +197,15 @@ function sampleData() {
   return {
     template: 'modern',
     accent: DEFAULT_ACCENT,
+    sections: {
+      summary: true,
+      experience: true,
+      education: true,
+      skills: true,
+      languages: true,
+      certifications: true,
+      projects: true,
+    },
     personal: {
       name: 'Ana Marques',
       title: 'Frontend Developer',
