@@ -6,7 +6,7 @@ pré-visualização em tempo real e exportação para PDF — tudo no browser, s
 ![demo](docs/demo.gif) <!-- adiciona um GIF do formulário em acção -->
 ![screenshot](docs/screenshot.png) <!-- adiciona um screenshot do CV gerado -->
 
-**🔗 Demo ao vivo:** _adiciona aqui o link depois do deploy_
+**🔗 Demo ao vivo:** https://rdonkdev.github.io/CV-Online/
 
 ---
 

@@ -8,7 +8,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "deploy": "vite build && gh-pages -d dist --dotfiles -u \"rdonkdev <rdonkdev@users.noreply.github.com>\" -m \"deploy: GitHub Pages build\""
   },
   "dependencies": {
     "pinia": "^2.2.6",
@@ -17,6 +18,7 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.1",
     "autoprefixer": "^10.4.20",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
     "vite": "^6.0.5",
