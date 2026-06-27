@@ -69,6 +69,11 @@
   background-color: color-mix(in srgb, var(--accent) 60%, #fff);
 }
 
+/* Tópicos (bullets) das descrições — marcador na cor de acento */
+.cv-bullets li::marker {
+  color: var(--accent);
+}
+
 /* ---- Impressão / Exportação PDF (texto vetorial + paginação A4 nativa) ---- */
 
 /* A cópia de impressão fica escondida no ecrã. */

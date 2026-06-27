@@ -70,10 +70,11 @@
         <textarea
           :id="`exp-desc-${exp.id}`"
           v-model="exp.description"
-          rows="3"
+          rows="4"
           class="input resize-none"
-          placeholder="Principais responsabilidades e conquistas."
+          placeholder="Uma linha por tópico — cada linha vira um bullet no CV.&#10;Ex.: Liderei a migração para Vue 3, -40% no tempo de carregamento.&#10;Criei um design system reutilizado por 5 equipas."
         />
+        <p class="mt-1 text-xs text-gray-400">Dica: cada linha vira um tópico (bullet).</p>
       </div>
     </div>
 

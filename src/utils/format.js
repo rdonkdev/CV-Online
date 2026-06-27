@@ -26,3 +26,16 @@ export function formatMonth(value) {
   const name = MONTHS_PT[parseInt(month, 10) - 1]
   return name ? `${name} ${year}` : value
 }
+
+/**
+ * Converte uma descrição multi-linha em tópicos (bullets).
+ * Cada linha não-vazia é um tópico; marcadores iniciais ("-", "*", "•")
+ * que o utilizador escreva são removidos para não duplicar com o bullet do CSS.
+ */
+export function toBullets(text) {
+  if (!text) return []
+  return text
+    .split('\n')
+    .map((line) => line.replace(/^\s*[-*•]\s*/, '').trim())
+    .filter(Boolean)
+}

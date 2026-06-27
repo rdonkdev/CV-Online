@@ -206,7 +206,7 @@ function sampleData() {
         endDate: '',
         current: true,
         description:
-          'Liderei a migração do dashboard principal para Vue 3, reduzindo o tempo de carregamento em 40%. Implementei um design system reutilizado por 5 equipas.',
+          'Liderei a migração do dashboard principal para Vue 3, reduzindo o tempo de carregamento em 40%.\nImplementei um design system reutilizado por 5 equipas.\nMentorei 2 developers júnior em boas práticas de frontend.',
       },
       {
         id: uid(),
@@ -216,7 +216,7 @@ function sampleData() {
         endDate: '2022-02',
         current: false,
         description:
-          'Desenvolvi componentes de UI e integrações com APIs REST. Colaborei na adopção de testes automatizados.',
+          'Desenvolvi componentes de UI reutilizáveis e integrações com APIs REST.\nColaborei na adopção de testes automatizados no time.',
       },
     ],
     education: [

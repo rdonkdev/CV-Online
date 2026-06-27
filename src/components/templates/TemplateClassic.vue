@@ -13,7 +13,7 @@
 
     <section v-if="p.summary" class="mt-6">
       <h2 class="classic-title">Perfil</h2>
-      <p class="leading-relaxed text-gray-700">{{ p.summary }}</p>
+      <p class="whitespace-pre-line leading-relaxed text-gray-700">{{ p.summary }}</p>
     </section>
 
     <section v-if="cv.experience.length" class="mt-6">
@@ -26,7 +26,9 @@
           </span>
         </div>
         <p class="text-sm italic text-gray-600">{{ exp.company }}</p>
-        <p class="mt-1 leading-relaxed text-gray-700">{{ exp.description }}</p>
+        <ul v-if="bullets(exp.description).length" class="cv-bullets ml-4 mt-1 list-disc space-y-0.5 leading-relaxed text-gray-700">
+          <li v-for="(b, bi) in bullets(exp.description)" :key="bi">{{ b }}</li>
+        </ul>
       </div>
     </section>
 
@@ -48,7 +50,9 @@
           <span class="font-bold text-gray-900">{{ pr.name }}</span>
           <span v-if="pr.link" class="break-all text-xs text-gray-500">{{ pr.link }}</span>
         </div>
-        <p class="mt-1 leading-relaxed text-gray-700">{{ pr.description }}</p>
+        <ul v-if="bullets(pr.description).length" class="cv-bullets ml-4 mt-1 list-disc space-y-0.5 leading-relaxed text-gray-700">
+          <li v-for="(b, bi) in bullets(pr.description)" :key="bi">{{ b }}</li>
+        </ul>
       </div>
     </section>
 
@@ -93,7 +97,7 @@
 import { computed } from 'vue'
 import { useCvStore } from '@/stores/cv'
 import { storeToRefs } from 'pinia'
-import { formatMonth as fmt } from '@/utils/format'
+import { formatMonth as fmt, toBullets as bullets } from '@/utils/format'
 
 const cv = useCvStore()
 const { personal: p } = storeToRefs(cv)

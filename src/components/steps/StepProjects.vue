@@ -38,10 +38,11 @@
         <textarea
           :id="`proj-desc-${proj.id}`"
           v-model="proj.description"
-          rows="2"
+          rows="3"
           class="input resize-none"
-          placeholder="O que é e que tecnologias usaste."
+          placeholder="Uma linha por tópico — cada linha vira um bullet no CV."
         />
+        <p class="mt-1 text-xs text-gray-400">Dica: cada linha vira um tópico (bullet).</p>
       </div>
     </div>
 
