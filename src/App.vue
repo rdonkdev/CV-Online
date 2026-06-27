@@ -5,7 +5,8 @@
       <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-y-2 px-4 py-3">
         <div class="flex items-center gap-2">
           <span class="text-xl">📄</span>
-          <h1 class="text-lg font-bold text-gray-900">Gerador de CV</h1>
+          <h1 class="hidden text-lg font-bold text-gray-900 sm:block">Gerador de CV</h1>
+          <ProfileSwitcher class="ml-1" />
         </div>
 
         <div class="flex flex-wrap items-center justify-end gap-2">
@@ -110,12 +111,17 @@
 <script setup>
 import { ref, watch, nextTick, onMounted, onBeforeUnmount } from 'vue'
 import { useCvStore } from '@/stores/cv'
+import { useProfilesStore } from '@/stores/profiles'
 import { usePdfExport } from '@/composables/usePdfExport'
 import FormWizard from '@/components/FormWizard.vue'
 import CVPreview from '@/components/CVPreview.vue'
 import TemplatePicker from '@/components/TemplatePicker.vue'
+import ProfileSwitcher from '@/components/ProfileSwitcher.vue'
 
 const cv = useCvStore()
+const profiles = useProfilesStore()
+// Carrega o perfil ativo no arranque.
+profiles.init()
 const { exportPdf, exporting } = usePdfExport()
 const mobileView = ref('form')
 
@@ -183,14 +189,14 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
 // Ao alternar para o preview no mobile, recalcula assim que fica visível.
 watch(mobileView, () => nextTick(updateZoom))
 
-// Persistência automática (com debounce): evita serializar o estado inteiro
-// a cada tecla — grava 400ms após a última alteração.
+// Persistência automática (com debounce): grava o CV no perfil ativo
+// 400ms após a última alteração.
 let persistTimer = null
 watch(
   () => cv.$state,
   () => {
     clearTimeout(persistTimer)
-    persistTimer = setTimeout(() => cv.persist(), 400)
+    persistTimer = setTimeout(() => profiles.saveActive(), 400)
   },
   { deep: true }
 )

@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 
-const STORAGE_KEY = 'cv-generator:data'
 const DEFAULT_ACCENT = '#2563eb' // blue-600
 
 // Estado inicial (também usado pelo "Limpar tudo")
@@ -59,15 +58,6 @@ function mergeState(saved) {
   }
 }
 
-function loadState() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    return raw ? mergeState(JSON.parse(raw)) : blankState()
-  } catch {
-    return blankState()
-  }
-}
-
 // id único e estável
 let seq = 0
 function uid() {
@@ -76,7 +66,8 @@ function uid() {
 }
 
 export const useCvStore = defineStore('cv', {
-  state: () => loadState(),
+  // Estado inicia em branco; o store de perfis carrega o perfil ativo.
+  state: () => blankState(),
 
   getters: {
     isEmpty: (s) =>
@@ -181,13 +172,6 @@ export const useCvStore = defineStore('cv', {
     },
     loadFrom(saved) {
       this.$patch(mergeState(saved))
-    },
-    persist() {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(this.$state))
-      } catch {
-        /* localStorage cheio ou indisponível — ignora silenciosamente */
-      }
     },
   },
 })
