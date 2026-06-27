@@ -14,7 +14,7 @@ pré-visualização em tempo real e exportação para PDF — tudo no browser, s
 
 - **Formulário multi-step** com barra de progresso e 7 secções: Pessoal, Experiência, Educação, Competências, Idiomas, Certificações e Projetos
 - **Pré-visualização em tempo real** — escreves no formulário, o CV actualiza ao lado
-- **3 templates** com um clique: `Modern`, `Classic`, `Minimal`
+- **18 templates** à escolha (Modern, Classic, Minimal, Elegant, Compact, Sidebar, Timeline, Professional, Corporate, Executive, Banner, Cards, Slate, Underline, Mono, Gradient, Refined, Creative)
 - **Múltiplos perfis de CV** — guarda vários CVs (ex.: "CV Dev", "CV PM") e alterna entre eles
 - **Mostrar/ocultar secções** sem apagar dados — adapta o mesmo CV a vagas diferentes
 - **Bullets nas descrições** — uma linha por tópico

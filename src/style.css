@@ -69,6 +69,15 @@
   }
 }
 
+/* Base partilhada por todos os templates (tamanho A4). Templates específicos
+   podem sobrepor o fundo (ex.: gradiente) com estilos scoped próprios. */
+.cv-page {
+  width: 210mm;
+  min-height: 297mm;
+  background: #fff;
+  color: #1f2937;
+}
+
 /* ---- Cor de acento (definida em .cv-page via --accent) ----
    Tons derivados com color-mix para funcionar com qualquer cor escolhida. */
 .text-accent {

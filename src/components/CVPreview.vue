@@ -1,24 +1,15 @@
 <template>
-  <!-- O id é propagado para o elemento A4 real, que é o que o html2pdf captura -->
+  <!-- O id é propagado para o elemento A4 real (capturado na impressão) -->
   <component :is="activeTemplate" :id="$attrs.id" />
 </template>
 
 <script setup>
 import { computed } from 'vue'
 import { useCvStore } from '@/stores/cv'
-import TemplateModern from '@/components/templates/TemplateModern.vue'
-import TemplateClassic from '@/components/templates/TemplateClassic.vue'
-import TemplateMinimal from '@/components/templates/TemplateMinimal.vue'
+import { templateMap } from '@/components/templates/registry'
 
 defineOptions({ inheritAttrs: false })
 
 const cv = useCvStore()
-
-const templates = {
-  modern: TemplateModern,
-  classic: TemplateClassic,
-  minimal: TemplateMinimal,
-}
-
-const activeTemplate = computed(() => templates[cv.template] || TemplateModern)
+const activeTemplate = computed(() => templateMap[cv.template] || templateMap.modern)
 </script>
