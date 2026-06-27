@@ -44,6 +44,13 @@
            dark:bg-gray-700/40 dark:text-gray-500;
   }
 
+  /* Item de menu dropdown */
+  .menu-item {
+    @apply block w-full px-4 py-2 text-left text-sm text-gray-700 transition
+           hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40
+           dark:text-gray-200 dark:hover:bg-gray-700;
+  }
+
   /* Botão-ícone pequeno (reordenar, etc.) */
   .icon-btn {
     @apply flex h-6 w-6 items-center justify-center rounded border border-gray-300 text-xs

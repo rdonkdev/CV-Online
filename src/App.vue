@@ -75,22 +75,35 @@
             </button>
           </div>
 
-          <button class="btn-ghost" @click="cv.loadSample()">Exemplo</button>
-          <button
-            class="btn-ghost"
-            title="Importar dados de um ficheiro JSON"
-            @click="triggerImport"
-          >
-            Importar
-          </button>
-          <button
-            class="btn-ghost"
-            :disabled="cv.isEmpty"
-            title="Guardar os teus dados num ficheiro JSON"
-            @click="exportData"
-          >
-            Guardar
-          </button>
+          <!-- Menu de ações secundárias (mantém o header limpo em mobile) -->
+          <div class="relative">
+            <button class="btn-ghost" :aria-expanded="menuOpen" @click="menuOpen = !menuOpen">
+              Ações ▾
+            </button>
+            <!-- Backdrop para fechar ao clicar fora; itens do menu são botões (teclado ok). -->
+            <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions, vuejs-accessibility/click-events-have-key-events -->
+            <div v-if="menuOpen" class="fixed inset-0 z-30" @click="menuOpen = false" />
+            <div
+              v-if="menuOpen"
+              class="absolute right-0 z-40 mt-1 w-52 overflow-hidden rounded-lg border border-gray-200 bg-white py-1 shadow-lg dark:border-gray-700 dark:bg-gray-800"
+            >
+              <button class="menu-item" @click="runAction(() => cv.loadSample())">
+                Carregar exemplo
+              </button>
+              <button class="menu-item" @click="runAction(triggerImport)">Importar (JSON)</button>
+              <button class="menu-item" :disabled="cv.isEmpty" @click="runAction(exportData)">
+                Guardar dados (JSON)
+              </button>
+              <button
+                class="menu-item"
+                :disabled="cv.isEmpty"
+                @click="runAction(() => (showPreview = true))"
+              >
+                Pré-visualizar
+              </button>
+            </div>
+          </div>
+
           <input
             ref="fileInput"
             type="file"
@@ -99,9 +112,6 @@
             aria-label="Importar dados de um ficheiro JSON"
             @change="importData"
           />
-          <button class="btn-ghost" :disabled="cv.isEmpty" @click="showPreview = true">
-            Pré-visualizar
-          </button>
           <button
             class="btn-primary"
             :disabled="exporting || cv.isEmpty"
@@ -214,6 +224,13 @@ const { exportPdf, exporting } = usePdfExport()
 const toasts = useToasts()
 const mobileView = ref('form')
 const showPreview = ref(false)
+const menuOpen = ref(false)
+
+// Executa uma ação do menu e fecha-o.
+function runAction(fn) {
+  fn()
+  menuOpen.value = false
+}
 
 // ---- Indicador de gravação + histórico (undo/redo) ----
 const saveState = ref('saved')
