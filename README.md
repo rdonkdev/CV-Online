@@ -6,7 +6,7 @@ pré-visualização em tempo real e exportação para PDF — tudo no browser, s
 ![demo](docs/demo.gif) <!-- adiciona um GIF do formulário em acção -->
 ![screenshot](docs/screenshot.png) <!-- adiciona um screenshot do CV gerado -->
 
-**🔗 Demo ao vivo:** https://rdonkdev.github.io/CV-Online/
+**🔗 Demo ao vivo:** https://tembue2.github.io/CV-Online/
 
 ---
 
@@ -144,4 +144,4 @@ Algumas escolhas de arquitetura e o porquê:
 
 ## 📄 Licença
 
-[MIT](LICENSE) © rdonkdev
+[MIT](LICENSE) © tembue2

@@ -13,7 +13,7 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "deploy": "vite build && gh-pages -d dist --dotfiles -u \"rdonkdev <rdonkdev@users.noreply.github.com>\" -m \"deploy: GitHub Pages build\""
+    "deploy": "vite build && gh-pages -d dist --dotfiles -u \"tembue2 <117306862+tembue2@users.noreply.github.com>\" -m \"deploy: GitHub Pages build\""
   },
   "dependencies": {
     "pinia": "^2.2.6",
