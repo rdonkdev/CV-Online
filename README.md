@@ -30,7 +30,8 @@ pré-visualização em tempo real e exportação para PDF — tudo no browser, s
 - **Pré-visualização de impressão** in-app antes de exportar
 - **Acessível** — labels associados, `aria-*`, navegação por teclado
 - **Responsivo** — no mobile alternas entre formulário e preview
-- **Testado** — testes unitários com Vitest (`npm test`)
+- **Testado** — 32 testes (Vitest) a cobrir o store (CV + perfis), utilitários e
+  componentes (FormWizard, ItemActions, SectionToggle, templates)
 
 ---
 
@@ -97,11 +98,36 @@ src/
 
 ## ☁️ Deploy
 
-O projecto é 100% estático — qualquer um destes serviços liga directamente ao GitHub:
+O projeto está publicado no **GitHub Pages** (a partir do branch `gh-pages`). Para
+republicar após mudanças, basta um comando:
 
-- **Vercel:** importa o repo → framework `Vite` → deploy
-- **Netlify:** build command `npm run build`, publish dir `dist`
-- **GitHub Pages:** `npm run build` e publica a pasta `dist`
+```bash
+npm run deploy   # build + publish do dist para o branch gh-pages
+```
+
+Por ser 100% estático, também corre tal-e-qual no Vercel ou Netlify.
+
+---
+
+## 🧠 Decisões técnicas
+
+Algumas escolhas de arquitetura e o porquê:
+
+- **PDF via impressão nativa (`window.print()`) em vez de `html2pdf.js`.**
+  O `html2pdf` rasteriza o CV para uma imagem — o texto deixa de ser selecionável e,
+  pior, **sistemas ATS não conseguem lê-lo**. Optei pela impressão nativa do browser:
+  gera **texto vetorial real** (selecionável, pesquisável, legível por ATS), com
+  **paginação A4 automática** e sem dependências pesadas. _Trade-off:_ o utilizador
+  passa pelo diálogo de impressão ("Guardar como PDF"); a fidelidade é máxima no
+  Chrome/Edge. Uma pré-visualização in-app prepara o utilizador para esse passo.
+- **Deploy por branch `gh-pages` (e não GitHub Actions).** Permite publicar com um
+  comando sem depender de minutos de CI, mantendo o `main` só com código-fonte.
+- **`zoom` (não `transform: scale`) na pré-visualização.** O `zoom` reflui o layout,
+  pelo que o A4 encolhe sem deixar espaço morto à volta.
+- **Cor de acento via CSS `--accent` + `color-mix`.** Um único valor gera todos os
+  tons derivados (claros/escuros), por isso os 18 templates reagem à mesma cor.
+- **Perfis num store Pinia dedicado** que orquestra a persistência; o store do CV é
+  apenas a "cópia de trabalho" do perfil ativo.
 
 ---
 
@@ -113,3 +139,9 @@ O projecto é 100% estático — qualquer um destes serviços liga directamente 
 - O nome de ficheiro sugerido vem de `document.title` (respeitado de forma fiável no Chrome).
 - O template `Modern` (duas colunas) é ideal para 1 página; para CVs longos, `Classic` e
   `Minimal` (coluna única) paginam de forma mais robusta.
+
+---
+
+## 📄 Licença
+
+[MIT](LICENSE) © rdonkdev

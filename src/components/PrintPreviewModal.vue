@@ -10,7 +10,13 @@
   >
     <!-- Barra de ações -->
     <div class="flex flex-wrap items-center justify-between gap-2 px-4 py-3 text-white">
-      <span class="text-sm font-medium">Pré-visualização — A4</span>
+      <div>
+        <span class="text-sm font-medium">Pré-visualização — A4</span>
+        <p class="text-xs text-white/70">
+          Ao exportar, escolhe <strong>“Guardar como PDF”</strong> no diálogo de impressão. O PDF
+          terá texto real (selecionável e legível por ATS).
+        </p>
+      </div>
       <div class="flex items-center gap-2">
         <button type="button" class="btn-primary" @click="$emit('export')">Exportar PDF</button>
         <button
