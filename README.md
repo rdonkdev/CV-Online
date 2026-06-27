@@ -23,6 +23,10 @@ pré-visualização em tempo real e exportação para PDF — tudo no browser, s
 - **Exportação para PDF** com texto vetorial real (selecionável e legível por ATS) via impressão nativa, com paginação A4 automática
 - **Export / Import dos dados em JSON** — leva o teu CV entre dispositivos
 - **Persistência automática** no `localStorage` (com debounce)
+- **Undo/redo** das edições (Ctrl+Z / Ctrl+Y) e indicador "Guardado ✓"
+- **Medidor de completude** do CV e onboarding guiado no primeiro uso
+- **Modo escuro** no editor (o CV mantém-se branco)
+- **Pré-visualização de impressão** in-app antes de exportar
 - **Acessível** — labels associados, `aria-*`, navegação por teclado
 - **Responsivo** — no mobile alternas entre formulário e preview
 - **Testado** — testes unitários com Vitest (`npm test`)

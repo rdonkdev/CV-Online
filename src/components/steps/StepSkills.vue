@@ -2,14 +2,14 @@
   <div class="space-y-4">
     <SectionToggle v-model="cv.sections.skills" label="Mostrar ou ocultar as Competências no CV" />
 
-    <p v-if="!cv.skills.length" class="rounded-lg bg-gray-50 p-6 text-center text-sm text-gray-400">
+    <p v-if="!cv.skills.length" class="empty-hint">
       Ainda sem competências. Adiciona a primeira.
     </p>
 
     <div
       v-for="(skill, i) in cv.skills"
       :key="skill.id"
-      class="flex flex-wrap items-center gap-3 rounded-lg border border-gray-200 p-3"
+      class="field-card flex flex-wrap items-center gap-3 p-3"
     >
       <input
         v-model="skill.name"

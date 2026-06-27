@@ -2,14 +2,14 @@
   <div class="space-y-4">
     <SectionToggle v-model="cv.sections.certifications" label="Mostrar ou ocultar as Certificações no CV" />
 
-    <p v-if="!cv.certifications.length" class="rounded-lg bg-gray-50 p-6 text-center text-sm text-gray-400">
+    <p v-if="!cv.certifications.length" class="empty-hint">
       Ainda sem certificações. Adiciona a primeira.
     </p>
 
     <div
       v-for="(cert, i) in cv.certifications"
       :key="cert.id"
-      class="rounded-lg border border-gray-200 p-4"
+      class="field-card p-4"
     >
       <div class="mb-3 flex items-center justify-between">
         <span class="text-xs font-semibold text-gray-400">

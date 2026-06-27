@@ -79,6 +79,21 @@ export const useCvStore = defineStore('cv', {
       s.languages.length === 0 &&
       s.certifications.length === 0 &&
       s.projects.length === 0,
+
+    // Percentagem de preenchimento (heurística ponderada por checklist).
+    completeness: (s) => {
+      const checks = [
+        !!s.personal.name,
+        !!s.personal.title,
+        !!s.personal.email,
+        !!s.personal.summary,
+        s.experience.some((e) => e.role && e.description),
+        s.education.length > 0,
+        s.skills.length >= 3,
+        s.languages.length > 0 || s.certifications.length > 0 || s.projects.length > 0,
+      ]
+      return Math.round((checks.filter(Boolean).length / checks.length) * 100)
+    },
   },
 
   actions: {

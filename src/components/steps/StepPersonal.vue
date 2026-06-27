@@ -62,6 +62,9 @@
         class="input resize-none"
         placeholder="Breve descrição sobre ti, a tua experiência e objectivos."
       />
+      <div class="mt-1 flex justify-end text-xs" :class="p.summary.length > 600 ? 'text-amber-600' : 'text-gray-400'">
+        {{ p.summary.length }} caracteres{{ p.summary.length > 600 ? ' — considera encurtar' : '' }}
+      </div>
     </div>
   </div>
 </template>

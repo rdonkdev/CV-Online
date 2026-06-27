@@ -2,14 +2,14 @@
   <div class="space-y-4">
     <SectionToggle v-model="cv.sections.education" label="Mostrar ou ocultar a Educação no CV" />
 
-    <p v-if="!cv.education.length" class="rounded-lg bg-gray-50 p-6 text-center text-sm text-gray-400">
+    <p v-if="!cv.education.length" class="empty-hint">
       Ainda sem formação. Adiciona a primeira.
     </p>
 
     <div
       v-for="(edu, i) in cv.education"
       :key="edu.id"
-      class="rounded-lg border border-gray-200 p-4"
+      class="field-card p-4"
     >
       <div class="mb-3 flex items-center justify-between">
         <span class="text-xs font-semibold text-gray-400">

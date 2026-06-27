@@ -2,14 +2,14 @@
   <div class="space-y-4">
     <SectionToggle v-model="cv.sections.experience" label="Mostrar ou ocultar a Experiência no CV" />
 
-    <p v-if="!cv.experience.length" class="rounded-lg bg-gray-50 p-6 text-center text-sm text-gray-400">
+    <p v-if="!cv.experience.length" class="empty-hint">
       Ainda sem experiência. Adiciona a primeira.
     </p>
 
     <div
       v-for="(exp, i) in cv.experience"
       :key="exp.id"
-      class="rounded-lg border border-gray-200 p-4"
+      class="field-card p-4"
     >
       <div class="mb-3 flex items-center justify-between">
         <span class="text-xs font-semibold text-gray-400">
@@ -76,7 +76,10 @@
           class="input resize-none"
           placeholder="Uma linha por tópico — cada linha vira um bullet no CV.&#10;Ex.: Liderei a migração para Vue 3, -40% no tempo de carregamento.&#10;Criei um design system reutilizado por 5 equipas."
         />
-        <p class="mt-1 text-xs text-gray-400">Dica: cada linha vira um tópico (bullet).</p>
+        <div class="mt-1 flex justify-between text-xs text-gray-400">
+          <span>Dica: cada linha vira um tópico (bullet).</span>
+          <span>{{ exp.description.length }}</span>
+        </div>
       </div>
     </div>
 

@@ -1,9 +1,9 @@
 <template>
-  <div class="rounded-xl bg-white p-6 shadow-sm">
+  <div class="rounded-xl bg-white p-6 shadow-sm dark:bg-gray-800">
     <!-- Barra de progresso -->
     <div class="mb-6">
       <div class="mb-2 flex items-center justify-between">
-        <span class="text-sm font-semibold text-gray-900">
+        <span class="text-sm font-semibold text-gray-900 dark:text-gray-100">
           {{ steps[current].label }}
         </span>
         <span class="text-xs text-gray-400">
@@ -11,7 +11,7 @@
         </span>
       </div>
 
-      <div class="h-2 w-full overflow-hidden rounded-full bg-gray-200">
+      <div class="h-2 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
         <div
           class="h-full rounded-full bg-blue-600 transition-all duration-300"
           :style="{ width: `${((current + 1) / steps.length) * 100}%` }"
@@ -35,8 +35,8 @@
               i === current
                 ? 'bg-blue-600 text-white'
                 : i < current
-                  ? 'bg-blue-100 text-blue-700'
-                  : 'bg-gray-100 text-gray-400'
+                  ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200'
+                  : 'bg-gray-100 text-gray-400 dark:bg-gray-700 dark:text-gray-500'
             "
           >
             {{ i < current ? '✓' : i + 1 }}
@@ -54,7 +54,7 @@
     </div>
 
     <!-- Navegação -->
-    <div class="mt-6 flex items-center justify-between border-t border-gray-100 pt-4">
+    <div class="mt-6 flex items-center justify-between border-t border-gray-100 pt-4 dark:border-gray-700">
       <button type="button" class="btn-ghost" :disabled="current === 0" @click="prev">
         ← Anterior
       </button>

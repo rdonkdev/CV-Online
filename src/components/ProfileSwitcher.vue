@@ -2,7 +2,7 @@
   <div class="relative">
     <div class="flex items-center gap-1">
       <select
-        class="max-w-[10rem] rounded-lg border border-gray-300 bg-white px-2 py-1.5 text-sm text-gray-700"
+        class="max-w-[10rem] rounded-lg border border-gray-300 bg-white px-2 py-1.5 text-sm text-gray-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200"
         :value="profiles.activeId"
         aria-label="CV ativo"
         @change="profiles.switchTo($event.target.value)"
@@ -23,7 +23,7 @@
     <!-- Painel de gestão -->
     <div
       v-if="open"
-      class="absolute left-0 z-30 mt-1 w-64 rounded-lg border border-gray-200 bg-white p-3 shadow-lg"
+      class="absolute left-0 z-30 mt-1 w-64 rounded-lg border border-gray-200 bg-white p-3 shadow-lg dark:border-gray-700 dark:bg-gray-800"
     >
       <label class="label">Nome deste CV</label>
       <div class="flex gap-2">

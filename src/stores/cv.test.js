@@ -68,4 +68,11 @@ describe('cv store', () => {
     cv.reset()
     expect(cv.isEmpty).toBe(true)
   })
+
+  it('completeness vai de 0 a 100', () => {
+    const cv = useCvStore()
+    expect(cv.completeness).toBe(0)
+    cv.loadSample()
+    expect(cv.completeness).toBe(100)
+  })
 })
