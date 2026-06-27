@@ -14,7 +14,13 @@
       >
         <span>{{ icon(t.type) }}</span>
         <span>{{ t.message }}</span>
-        <button class="ml-2 text-white/70 hover:text-white" aria-label="Fechar" @click="dismiss(t.id)">×</button>
+        <button
+          class="ml-2 text-white/70 hover:text-white"
+          aria-label="Fechar"
+          @click="dismiss(t.id)"
+        >
+          ×
+        </button>
       </div>
     </transition-group>
   </div>

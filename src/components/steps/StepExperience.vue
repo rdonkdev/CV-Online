@@ -1,16 +1,15 @@
 <template>
   <div class="space-y-4">
-    <SectionToggle v-model="cv.sections.experience" label="Mostrar ou ocultar a Experiência no CV" />
+    <SectionToggle
+      v-model="cv.sections.experience"
+      label="Mostrar ou ocultar a Experiência no CV"
+    />
 
     <p v-if="!cv.experience.length" class="empty-hint">
       Ainda sem experiência. Adiciona a primeira.
     </p>
 
-    <div
-      v-for="(exp, i) in cv.experience"
-      :key="exp.id"
-      class="field-card p-4"
-    >
+    <div v-for="(exp, i) in cv.experience" :key="exp.id" class="field-card p-4">
       <div class="mb-3 flex items-center justify-between">
         <span class="text-xs font-semibold text-gray-400">
           {{ exp.role || 'Nova experiência' }}
@@ -27,11 +26,21 @@
       <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div>
           <label :for="`exp-role-${exp.id}`" class="label">Cargo</label>
-          <input :id="`exp-role-${exp.id}`" v-model="exp.role" class="input" placeholder="Frontend Developer" />
+          <input
+            :id="`exp-role-${exp.id}`"
+            v-model="exp.role"
+            class="input"
+            placeholder="Frontend Developer"
+          />
         </div>
         <div>
           <label :for="`exp-company-${exp.id}`" class="label">Empresa</label>
-          <input :id="`exp-company-${exp.id}`" v-model="exp.company" class="input" placeholder="TechNova" />
+          <input
+            :id="`exp-company-${exp.id}`"
+            v-model="exp.company"
+            class="input"
+            placeholder="TechNova"
+          />
         </div>
       </div>
 
@@ -56,7 +65,10 @@
         A data de fim é anterior à de início.
       </p>
 
-      <label :for="`exp-current-${exp.id}`" class="mt-3 flex items-center gap-2 text-sm text-gray-600">
+      <label
+        :for="`exp-current-${exp.id}`"
+        class="mt-3 flex items-center gap-2 text-sm text-gray-600"
+      >
         <input
           :id="`exp-current-${exp.id}`"
           v-model="exp.current"

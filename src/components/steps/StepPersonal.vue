@@ -41,7 +41,12 @@
       </div>
       <div>
         <label for="p-linkedin" class="label">LinkedIn</label>
-        <input id="p-linkedin" v-model="p.linkedin" class="input" placeholder="linkedin.com/in/ana" />
+        <input
+          id="p-linkedin"
+          v-model="p.linkedin"
+          class="input"
+          placeholder="linkedin.com/in/ana"
+        />
       </div>
     </div>
 
@@ -53,7 +58,11 @@
     <div>
       <div class="mb-1 flex items-center justify-between">
         <label for="p-summary" class="label mb-0">Resumo / Perfil</label>
-        <SectionToggle v-model="cv.sections.summary" label="Mostrar ou ocultar o Resumo no CV" class="!bg-transparent !px-0 !py-0" />
+        <SectionToggle
+          v-model="cv.sections.summary"
+          label="Mostrar ou ocultar o Resumo no CV"
+          class="!bg-transparent !px-0 !py-0"
+        />
       </div>
       <textarea
         id="p-summary"
@@ -62,7 +71,10 @@
         class="input resize-none"
         placeholder="Breve descrição sobre ti, a tua experiência e objectivos."
       />
-      <div class="mt-1 flex justify-end text-xs" :class="p.summary.length > 600 ? 'text-amber-600' : 'text-gray-400'">
+      <div
+        class="mt-1 flex justify-end text-xs"
+        :class="p.summary.length > 600 ? 'text-amber-600' : 'text-gray-400'"
+      >
         {{ p.summary.length }} caracteres{{ p.summary.length > 600 ? ' — considera encurtar' : '' }}
       </div>
     </div>

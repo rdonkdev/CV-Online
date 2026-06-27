@@ -1,16 +1,15 @@
 <template>
   <div class="space-y-4">
-    <SectionToggle v-model="cv.sections.certifications" label="Mostrar ou ocultar as Certificações no CV" />
+    <SectionToggle
+      v-model="cv.sections.certifications"
+      label="Mostrar ou ocultar as Certificações no CV"
+    />
 
     <p v-if="!cv.certifications.length" class="empty-hint">
       Ainda sem certificações. Adiciona a primeira.
     </p>
 
-    <div
-      v-for="(cert, i) in cv.certifications"
-      :key="cert.id"
-      class="field-card p-4"
-    >
+    <div v-for="(cert, i) in cv.certifications" :key="cert.id" class="field-card p-4">
       <div class="mb-3 flex items-center justify-between">
         <span class="text-xs font-semibold text-gray-400">
           {{ cert.name || 'Nova certificação' }}
@@ -27,17 +26,33 @@
       <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div>
           <label :for="`cert-name-${cert.id}`" class="label">Certificação</label>
-          <input :id="`cert-name-${cert.id}`" v-model="cert.name" class="input" placeholder="Professional Scrum Master I" />
+          <input
+            :id="`cert-name-${cert.id}`"
+            v-model="cert.name"
+            class="input"
+            placeholder="Professional Scrum Master I"
+          />
         </div>
         <div>
           <label :for="`cert-issuer-${cert.id}`" class="label">Emissor</label>
-          <input :id="`cert-issuer-${cert.id}`" v-model="cert.issuer" class="input" placeholder="Scrum.org" />
+          <input
+            :id="`cert-issuer-${cert.id}`"
+            v-model="cert.issuer"
+            class="input"
+            placeholder="Scrum.org"
+          />
         </div>
       </div>
 
       <div class="mt-3 w-32">
         <label :for="`cert-year-${cert.id}`" class="label">Ano</label>
-        <input :id="`cert-year-${cert.id}`" v-model="cert.year" class="input" placeholder="2023" inputmode="numeric" />
+        <input
+          :id="`cert-year-${cert.id}`"
+          v-model="cert.year"
+          class="input"
+          placeholder="2023"
+          inputmode="numeric"
+        />
       </div>
     </div>
 

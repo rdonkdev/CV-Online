@@ -25,25 +25,35 @@
       v-if="open"
       class="absolute left-0 z-30 mt-1 w-64 rounded-lg border border-gray-200 bg-white p-3 shadow-lg dark:border-gray-700 dark:bg-gray-800"
     >
-      <label class="label">Nome deste CV</label>
+      <label for="profile-name" class="label">Nome deste CV</label>
       <div class="flex gap-2">
-        <input v-model="nameDraft" class="input" @keyup.enter="applyRename" />
+        <input id="profile-name" v-model="nameDraft" class="input" @keyup.enter="applyRename" />
         <button type="button" class="btn-ghost" @click="applyRename">Guardar</button>
       </div>
 
       <div class="mt-3 grid grid-cols-2 gap-2">
         <button type="button" class="btn-ghost justify-center" @click="onNew">+ Novo</button>
-        <button type="button" class="btn-ghost justify-center" @click="onDuplicate">Duplicar</button>
+        <button type="button" class="btn-ghost justify-center" @click="onDuplicate">
+          Duplicar
+        </button>
       </div>
 
       <div class="mt-2 border-t border-gray-100 pt-2">
         <template v-if="confirmingDelete">
           <p class="mb-2 text-xs text-gray-500">Eliminar “{{ profiles.activeName }}”?</p>
           <div class="flex gap-2">
-            <button type="button" class="btn-ghost justify-center text-red-600 hover:bg-red-50" @click="onDelete">
+            <button
+              type="button"
+              class="btn-ghost justify-center text-red-600 hover:bg-red-50"
+              @click="onDelete"
+            >
               Eliminar
             </button>
-            <button type="button" class="btn-ghost justify-center" @click="confirmingDelete = false">
+            <button
+              type="button"
+              class="btn-ghost justify-center"
+              @click="confirmingDelete = false"
+            >
               Cancelar
             </button>
           </div>

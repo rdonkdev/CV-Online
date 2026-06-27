@@ -2,15 +2,9 @@
   <div class="space-y-4">
     <SectionToggle v-model="cv.sections.projects" label="Mostrar ou ocultar os Projetos no CV" />
 
-    <p v-if="!cv.projects.length" class="empty-hint">
-      Ainda sem projetos. Adiciona o primeiro.
-    </p>
+    <p v-if="!cv.projects.length" class="empty-hint">Ainda sem projetos. Adiciona o primeiro.</p>
 
-    <div
-      v-for="(proj, i) in cv.projects"
-      :key="proj.id"
-      class="field-card p-4"
-    >
+    <div v-for="(proj, i) in cv.projects" :key="proj.id" class="field-card p-4">
       <div class="mb-3 flex items-center justify-between">
         <span class="text-xs font-semibold text-gray-400">
           {{ proj.name || 'Novo projeto' }}
@@ -27,11 +21,21 @@
       <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div>
           <label :for="`proj-name-${proj.id}`" class="label">Nome</label>
-          <input :id="`proj-name-${proj.id}`" v-model="proj.name" class="input" placeholder="Gerador de CV" />
+          <input
+            :id="`proj-name-${proj.id}`"
+            v-model="proj.name"
+            class="input"
+            placeholder="Gerador de CV"
+          />
         </div>
         <div>
           <label :for="`proj-link-${proj.id}`" class="label">Link</label>
-          <input :id="`proj-link-${proj.id}`" v-model="proj.link" class="input" placeholder="github.com/user/projeto" />
+          <input
+            :id="`proj-link-${proj.id}`"
+            v-model="proj.link"
+            class="input"
+            placeholder="github.com/user/projeto"
+          />
         </div>
       </div>
 

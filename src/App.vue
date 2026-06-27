@@ -7,7 +7,9 @@
       <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-y-2 px-4 py-3">
         <div class="flex items-center gap-2">
           <span class="text-xl">📄</span>
-          <h1 class="hidden text-lg font-bold text-gray-900 dark:text-gray-100 sm:block">Gerador de CV</h1>
+          <h1 class="hidden text-lg font-bold text-gray-900 dark:text-gray-100 sm:block">
+            Gerador de CV
+          </h1>
           <ProfileSwitcher class="ml-1" />
         </div>
 
@@ -18,11 +20,32 @@
           </span>
 
           <!-- Undo / Redo -->
-          <button class="icon-btn" :disabled="!canUndo" title="Anular (Ctrl+Z)" aria-label="Anular" @click="undo">↶</button>
-          <button class="icon-btn" :disabled="!canRedo" title="Refazer (Ctrl+Y)" aria-label="Refazer" @click="redo">↷</button>
+          <button
+            class="icon-btn"
+            :disabled="!canUndo"
+            title="Anular (Ctrl+Z)"
+            aria-label="Anular"
+            @click="undo"
+          >
+            ↶
+          </button>
+          <button
+            class="icon-btn"
+            :disabled="!canRedo"
+            title="Refazer (Ctrl+Y)"
+            aria-label="Refazer"
+            @click="redo"
+          >
+            ↷
+          </button>
 
           <!-- Modo escuro -->
-          <button class="icon-btn" :title="dark ? 'Modo claro' : 'Modo escuro'" :aria-label="dark ? 'Modo claro' : 'Modo escuro'" @click="toggleDark">
+          <button
+            class="icon-btn"
+            :title="dark ? 'Modo claro' : 'Modo escuro'"
+            :aria-label="dark ? 'Modo claro' : 'Modo escuro'"
+            @click="toggleDark"
+          >
             {{ dark ? '☀' : '🌙' }}
           </button>
 
@@ -30,14 +53,22 @@
           <div class="flex rounded-lg border border-gray-300 p-0.5 dark:border-gray-600 lg:hidden">
             <button
               class="rounded-md px-3 py-1 text-xs font-medium transition"
-              :class="mobileView === 'form' ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-300'"
+              :class="
+                mobileView === 'form'
+                  ? 'bg-blue-600 text-white'
+                  : 'text-gray-600 dark:text-gray-300'
+              "
               @click="mobileView = 'form'"
             >
               Formulário
             </button>
             <button
               class="rounded-md px-3 py-1 text-xs font-medium transition"
-              :class="mobileView === 'preview' ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-300'"
+              :class="
+                mobileView === 'preview'
+                  ? 'bg-blue-600 text-white'
+                  : 'text-gray-600 dark:text-gray-300'
+              "
               @click="mobileView = 'preview'"
             >
               Preview
@@ -45,12 +76,32 @@
           </div>
 
           <button class="btn-ghost" @click="cv.loadSample()">Exemplo</button>
-          <button class="btn-ghost" title="Importar dados de um ficheiro JSON" @click="triggerImport">Importar</button>
-          <button class="btn-ghost" :disabled="cv.isEmpty" title="Guardar os teus dados num ficheiro JSON" @click="exportData">
+          <button
+            class="btn-ghost"
+            title="Importar dados de um ficheiro JSON"
+            @click="triggerImport"
+          >
+            Importar
+          </button>
+          <button
+            class="btn-ghost"
+            :disabled="cv.isEmpty"
+            title="Guardar os teus dados num ficheiro JSON"
+            @click="exportData"
+          >
             Guardar
           </button>
-          <input ref="fileInput" type="file" accept="application/json,.json" class="hidden" @change="importData" />
-          <button class="btn-ghost" :disabled="cv.isEmpty" @click="showPreview = true">Pré-visualizar</button>
+          <input
+            ref="fileInput"
+            type="file"
+            accept="application/json,.json"
+            class="hidden"
+            aria-label="Importar dados de um ficheiro JSON"
+            @change="importData"
+          />
+          <button class="btn-ghost" :disabled="cv.isEmpty" @click="showPreview = true">
+            Pré-visualizar
+          </button>
           <button
             class="btn-primary"
             :disabled="exporting || cv.isEmpty"
@@ -74,8 +125,8 @@
         >
           <p class="font-medium text-blue-800 dark:text-blue-200">👋 Bem-vindo!</p>
           <p class="mt-1 text-blue-700 dark:text-blue-300">
-            Preenche os campos abaixo e vê o teu CV a montar-se ao lado em tempo real.
-            Sem ideias? Carrega um exemplo para experimentares.
+            Preenche os campos abaixo e vê o teu CV a montar-se ao lado em tempo real. Sem ideias?
+            Carrega um exemplo para experimentares.
           </p>
           <button class="btn-primary mt-3" @click="cv.loadSample()">Carregar exemplo</button>
         </div>
@@ -83,18 +134,23 @@
         <!-- Medidor de completude -->
         <div v-else class="mb-3 rounded-xl bg-white p-3 shadow-sm dark:bg-gray-800">
           <div class="mb-1 flex items-center justify-between text-xs">
-            <span class="font-medium text-gray-600 dark:text-gray-300">CV {{ cv.completeness }}% completo</span>
+            <span class="font-medium text-gray-600 dark:text-gray-300"
+              >CV {{ cv.completeness }}% completo</span
+            >
             <span class="text-gray-400">{{ completenessHint }}</span>
           </div>
           <div class="h-1.5 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
-            <div class="h-full rounded-full bg-blue-600 transition-all duration-500" :style="{ width: `${cv.completeness}%` }" />
+            <div
+              class="h-full rounded-full bg-blue-600 transition-all duration-500"
+              :style="{ width: `${cv.completeness}%` }"
+            />
           </div>
         </div>
 
         <FormWizard />
         <p class="mt-3 px-1 text-center text-xs text-gray-400 dark:text-gray-500">
-          🔒 Os teus dados ficam apenas neste browser (localStorage) — nada é enviado para servidores.
-          Em computador partilhado, usa "Limpar tudo" ao terminar.
+          🔒 Os teus dados ficam apenas neste browser (localStorage) — nada é enviado para
+          servidores. Em computador partilhado, usa "Limpar tudo" ao terminar.
         </p>
       </section>
 
@@ -102,13 +158,18 @@
       <section class="w-full lg:w-[55%]" :class="{ 'hidden lg:block': mobileView !== 'preview' }">
         <div class="sticky top-20">
           <div class="mb-3 flex items-center justify-between">
-            <span class="text-xs font-medium uppercase tracking-wider text-gray-400">Pré-visualização</span>
+            <span class="text-xs font-medium uppercase tracking-wider text-gray-400"
+              >Pré-visualização</span
+            >
             <TemplatePicker />
           </div>
 
           <!-- Wrapper com scroll. Usa `zoom` (não `transform: scale`) para que
                o CV encolha refluindo o layout, sem deixar espaço vazio em baixo. -->
-          <div ref="previewBox" class="overflow-auto rounded-xl bg-gray-300 p-4 shadow-inner dark:bg-gray-700">
+          <div
+            ref="previewBox"
+            class="overflow-auto rounded-xl bg-gray-300 p-4 shadow-inner dark:bg-gray-700"
+          >
             <div class="mx-auto w-fit" :style="{ zoom: previewZoom }">
               <CVPreview id="cv-preview" />
             </div>
@@ -156,9 +217,21 @@ const showPreview = ref(false)
 
 // ---- Indicador de gravação + histórico (undo/redo) ----
 const saveState = ref('saved')
-watch(() => cv.$state, () => { saveState.value = 'saving' }, { deep: true })
+watch(
+  () => cv.$state,
+  () => {
+    saveState.value = 'saving'
+  },
+  { deep: true }
+)
 
-const { undo, redo, canUndo, canRedo, reset: resetHistory } = useHistory(cv, {
+const {
+  undo,
+  redo,
+  canUndo,
+  canRedo,
+  reset: resetHistory,
+} = useHistory(cv, {
   onCommit: () => {
     profiles.saveActive()
     saveState.value = 'saved'
@@ -186,8 +259,13 @@ const completenessHint = computed(() => {
 function onKey(e) {
   const meta = e.ctrlKey || e.metaKey
   if (!meta) return
-  if (e.key === 'z' && !e.shiftKey) { e.preventDefault(); undo() }
-  else if (e.key === 'y' || (e.key === 'z' && e.shiftKey)) { e.preventDefault(); redo() }
+  if (e.key === 'z' && !e.shiftKey) {
+    e.preventDefault()
+    undo()
+  } else if (e.key === 'y' || (e.key === 'z' && e.shiftKey)) {
+    e.preventDefault()
+    redo()
+  }
 }
 
 // ---- Modo escuro (apenas o editor; o CV mantém-se branco) ----
@@ -199,7 +277,11 @@ function applyDark(v) {
 function toggleDark() {
   dark.value = !dark.value
   applyDark(dark.value)
-  try { localStorage.setItem(THEME_KEY, dark.value ? 'dark' : 'light') } catch {}
+  try {
+    localStorage.setItem(THEME_KEY, dark.value ? 'dark' : 'light')
+  } catch {
+    /* localStorage indisponível — ignora */
+  }
 }
 
 // ---- Export PDF ----

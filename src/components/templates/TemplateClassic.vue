@@ -1,5 +1,8 @@
 <template>
-  <div class="cv-page bg-white p-12 font-serif text-sm text-gray-800" :style="{ '--accent': cv.accent }">
+  <div
+    class="cv-page bg-white p-12 font-serif text-sm text-gray-800"
+    :style="{ '--accent': cv.accent }"
+  >
     <!-- Cabeçalho centrado -->
     <header class="border-b-2 border-accent pb-4 text-center">
       <h1 class="text-3xl font-bold uppercase tracking-wide text-gray-900">
@@ -26,7 +29,10 @@
           </span>
         </div>
         <p class="text-sm italic text-gray-600">{{ exp.company }}</p>
-        <ul v-if="bullets(exp.description).length" class="cv-bullets ml-4 mt-1 list-disc space-y-0.5 leading-relaxed text-gray-700">
+        <ul
+          v-if="bullets(exp.description).length"
+          class="cv-bullets ml-4 mt-1 list-disc space-y-0.5 leading-relaxed text-gray-700"
+        >
           <li v-for="(b, bi) in bullets(exp.description)" :key="bi">{{ b }}</li>
         </ul>
       </div>
@@ -36,7 +42,9 @@
       <h2 class="classic-title">Educação</h2>
       <div v-for="e in cv.education" :key="e.id" class="mb-3 break-inside-avoid">
         <div class="flex items-baseline justify-between">
-          <span class="font-bold text-gray-900">{{ e.degree }}<span v-if="e.field">, {{ e.field }}</span></span>
+          <span class="font-bold text-gray-900"
+            >{{ e.degree }}<span v-if="e.field">, {{ e.field }}</span></span
+          >
           <span class="text-xs text-gray-500">{{ fmt(e.startDate) }} — {{ fmt(e.endDate) }}</span>
         </div>
         <p class="text-sm italic text-gray-600">{{ e.institution }}</p>
@@ -50,7 +58,10 @@
           <span class="font-bold text-gray-900">{{ pr.name }}</span>
           <span v-if="pr.link" class="break-all text-xs text-gray-500">{{ pr.link }}</span>
         </div>
-        <ul v-if="bullets(pr.description).length" class="cv-bullets ml-4 mt-1 list-disc space-y-0.5 leading-relaxed text-gray-700">
+        <ul
+          v-if="bullets(pr.description).length"
+          class="cv-bullets ml-4 mt-1 list-disc space-y-0.5 leading-relaxed text-gray-700"
+        >
           <li v-for="(b, bi) in bullets(pr.description)" :key="bi">{{ b }}</li>
         </ul>
       </div>
@@ -82,7 +93,11 @@
 
     <section v-if="cv.sections.certifications && cv.certifications.length" class="mt-6">
       <h2 class="classic-title">Certificações</h2>
-      <div v-for="c in cv.certifications" :key="c.id" class="mb-1 flex items-baseline justify-between break-inside-avoid">
+      <div
+        v-for="c in cv.certifications"
+        :key="c.id"
+        class="mb-1 flex items-baseline justify-between break-inside-avoid"
+      >
         <span class="text-gray-700"
           ><span class="font-medium text-gray-900">{{ c.name }}</span
           ><span v-if="c.issuer" class="italic"> — {{ c.issuer }}</span></span

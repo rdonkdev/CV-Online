@@ -1,11 +1,12 @@
 <template>
+  <!-- Backdrop: clicar fora fecha; teclado tem Esc (window) e botão "Fechar". -->
+  <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions, vuejs-accessibility/click-events-have-key-events -->
   <div
     class="fixed inset-0 z-40 flex flex-col bg-black/60 backdrop-blur-sm"
     role="dialog"
     aria-modal="true"
     aria-label="Pré-visualização de impressão"
-    @click.self="$emit('close')"
-    @keydown.esc="$emit('close')"
+    @click.self="emit('close')"
   >
     <!-- Barra de ações -->
     <div class="flex items-center justify-between gap-2 px-4 py-3 text-white">
@@ -35,13 +36,19 @@
 import { onMounted, onBeforeUnmount } from 'vue'
 import CVPreview from '@/components/CVPreview.vue'
 
-defineEmits(['close', 'export'])
+const emit = defineEmits(['close', 'export'])
 
-// Bloqueia o scroll do fundo enquanto o modal está aberto.
+function onKey(e) {
+  if (e.key === 'Escape') emit('close')
+}
+
+// Bloqueia o scroll do fundo e ativa o fecho com Esc enquanto o modal está aberto.
 onMounted(() => {
   document.body.style.overflow = 'hidden'
+  window.addEventListener('keydown', onKey)
 })
 onBeforeUnmount(() => {
   document.body.style.overflow = ''
+  window.removeEventListener('keydown', onKey)
 })
 </script>

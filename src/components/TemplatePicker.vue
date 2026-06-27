@@ -40,7 +40,9 @@
           aria-label="Escolher cor de acento personalizada"
           @input="cv.setAccent($event.target.value)"
         />
-        <span class="block h-5 w-5 rounded-full border border-gray-300 bg-gradient-to-br from-pink-500 via-yellow-400 to-blue-500" />
+        <span
+          class="block h-5 w-5 rounded-full border border-gray-300 bg-gradient-to-br from-pink-500 via-yellow-400 to-blue-500"
+        />
       </label>
     </div>
   </div>

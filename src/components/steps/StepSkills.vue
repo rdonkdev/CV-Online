@@ -2,9 +2,7 @@
   <div class="space-y-4">
     <SectionToggle v-model="cv.sections.skills" label="Mostrar ou ocultar as Competências no CV" />
 
-    <p v-if="!cv.skills.length" class="empty-hint">
-      Ainda sem competências. Adiciona a primeira.
-    </p>
+    <p v-if="!cv.skills.length" class="empty-hint">Ainda sem competências. Adiciona a primeira.</p>
 
     <div
       v-for="(skill, i) in cv.skills"
@@ -18,7 +16,11 @@
         aria-label="Nome da competência"
       />
 
-      <div class="flex items-center gap-1" role="group" :aria-label="`Nível de ${skill.name || 'competência'}`">
+      <div
+        class="flex items-center gap-1"
+        role="group"
+        :aria-label="`Nível de ${skill.name || 'competência'}`"
+      >
         <button
           v-for="n in 5"
           :key="n"

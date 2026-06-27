@@ -1,5 +1,7 @@
 <template>
-  <div class="flex items-center justify-between gap-2 rounded-lg bg-gray-50 px-3 py-2 dark:bg-gray-700/40">
+  <div
+    class="flex items-center justify-between gap-2 rounded-lg bg-gray-50 px-3 py-2 dark:bg-gray-700/40"
+  >
     <span class="text-xs font-medium text-gray-500 dark:text-gray-400">
       {{ modelValue ? 'Incluída no CV' : 'Oculta no CV' }}
     </span>

@@ -6,9 +6,7 @@
         <span class="text-sm font-semibold text-gray-900 dark:text-gray-100">
           {{ steps[current].label }}
         </span>
-        <span class="text-xs text-gray-400">
-          Passo {{ current + 1 }} de {{ steps.length }}
-        </span>
+        <span class="text-xs text-gray-400"> Passo {{ current + 1 }} de {{ steps.length }} </span>
       </div>
 
       <div class="h-2 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
@@ -41,7 +39,10 @@
           >
             {{ i < current ? '✓' : i + 1 }}
           </span>
-          <span class="max-w-full truncate" :class="i === current ? 'text-blue-600' : 'text-gray-400'">
+          <span
+            class="max-w-full truncate"
+            :class="i === current ? 'text-blue-600' : 'text-gray-400'"
+          >
             {{ s.short }}
           </span>
         </button>
@@ -54,7 +55,9 @@
     </div>
 
     <!-- Navegação -->
-    <div class="mt-6 flex items-center justify-between border-t border-gray-100 pt-4 dark:border-gray-700">
+    <div
+      class="mt-6 flex items-center justify-between border-t border-gray-100 pt-4 dark:border-gray-700"
+    >
       <button type="button" class="btn-ghost" :disabled="current === 0" @click="prev">
         ← Anterior
       </button>
@@ -67,10 +70,16 @@
       <div v-else class="flex items-center gap-2">
         <template v-if="confirming">
           <span class="text-xs text-gray-500">Apagar tudo?</span>
-          <button type="button" class="btn-ghost text-red-600 hover:bg-red-50" @click="doReset">Sim</button>
+          <button type="button" class="btn-ghost text-red-600 hover:bg-red-50" @click="doReset">
+            Sim
+          </button>
           <button type="button" class="btn-ghost" @click="confirming = false">Cancelar</button>
         </template>
-        <button type="button" class="btn-ghost text-red-600 hover:bg-red-50" @click="confirming = true">
+        <button
+          type="button"
+          class="btn-ghost text-red-600 hover:bg-red-50"
+          @click="confirming = true"
+        >
           Limpar tudo
         </button>
       </div>
@@ -94,7 +103,12 @@ const current = ref(0)
 
 const steps = [
   { key: 'personal', label: 'Dados pessoais', short: 'Pessoal', component: StepPersonal },
-  { key: 'experience', label: 'Experiência profissional', short: 'Exp.', component: StepExperience },
+  {
+    key: 'experience',
+    label: 'Experiência profissional',
+    short: 'Exp.',
+    component: StepExperience,
+  },
   { key: 'education', label: 'Educação', short: 'Educ.', component: StepEducation },
   { key: 'skills', label: 'Competências', short: 'Skills', component: StepSkills },
   { key: 'languages', label: 'Idiomas', short: 'Idiomas', component: StepLanguages },

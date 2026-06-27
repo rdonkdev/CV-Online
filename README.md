@@ -59,6 +59,14 @@ npm run build
 npm run preview
 ```
 
+Qualidade de código:
+
+```bash
+npm test          # testes unitários (Vitest)
+npm run lint      # ESLint (+ acessibilidade Vue)
+npm run format    # Prettier
+```
+
 ---
 
 ## 📁 Estrutura

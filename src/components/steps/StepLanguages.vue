@@ -2,9 +2,7 @@
   <div class="space-y-4">
     <SectionToggle v-model="cv.sections.languages" label="Mostrar ou ocultar os Idiomas no CV" />
 
-    <p v-if="!cv.languages.length" class="empty-hint">
-      Ainda sem idiomas. Adiciona o primeiro.
-    </p>
+    <p v-if="!cv.languages.length" class="empty-hint">Ainda sem idiomas. Adiciona o primeiro.</p>
 
     <div
       v-for="(lang, i) in cv.languages"
