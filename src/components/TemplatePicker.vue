@@ -1,15 +1,14 @@
 <template>
   <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
-    <!-- Template (dropdown) -->
-    <label class="sr-only" for="template-select">Template</label>
-    <select
-      id="template-select"
-      class="rounded-md border border-gray-300 bg-white px-2 py-1 text-xs font-medium text-gray-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200"
-      :value="cv.template"
-      @change="cv.setTemplate($event.target.value)"
+    <!-- Template (abre galeria de miniaturas) -->
+    <button
+      type="button"
+      class="flex items-center gap-1 rounded-md border border-gray-300 bg-white px-2.5 py-1 text-xs font-medium text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+      @click="showGallery = true"
     >
-      <option v-for="t in TEMPLATES" :key="t.value" :value="t.value">{{ t.label }}</option>
-    </select>
+      <span>🎨 {{ currentLabel }}</span>
+      <span class="text-gray-400">▾</span>
+    </button>
 
     <!-- Cor de acento -->
     <div class="flex flex-wrap items-center gap-1.5">
@@ -38,13 +37,22 @@
         />
       </label>
     </div>
+
+    <TemplateGallery v-if="showGallery" @close="showGallery = false" />
   </div>
 </template>
 
 <script setup>
+import { ref, computed } from 'vue'
 import { useCvStore } from '@/stores/cv'
 import { TEMPLATES } from '@/components/templates/registry'
+import TemplateGallery from '@/components/TemplateGallery.vue'
 
 const cv = useCvStore()
 const presets = ['#2563eb', '#0d9488', '#7c3aed', '#dc2626', '#ea580c', '#0f172a']
+const showGallery = ref(false)
+
+const currentLabel = computed(
+  () => TEMPLATES.find((t) => t.value === cv.template)?.label || 'Template'
+)
 </script>
