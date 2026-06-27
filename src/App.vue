@@ -6,7 +6,6 @@
     >
       <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-y-2 px-4 py-3">
         <div class="flex items-center gap-2">
-          <span class="text-xl">📄</span>
           <h1 class="hidden text-lg font-bold text-gray-900 dark:text-gray-100 sm:block">
             CV - Online
           </h1>
@@ -167,7 +166,7 @@
       <!-- Painel direito: preview -->
       <section class="w-full lg:w-[55%]" :class="{ 'hidden lg:block': mobileView !== 'preview' }">
         <div class="sticky top-20">
-          <div class="mb-3 flex items-center justify-between">
+          <div class="mb-3 flex flex-wrap items-center justify-between gap-2">
             <span class="text-xs font-medium uppercase tracking-wider text-gray-400"
               >Pré-visualização</span
             >

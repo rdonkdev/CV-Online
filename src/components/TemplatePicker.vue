@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center gap-3">
+  <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
     <!-- Templates -->
     <div class="flex items-center gap-1.5">
       <button
@@ -19,7 +19,7 @@
     </div>
 
     <!-- Cor de acento -->
-    <div class="flex items-center gap-1.5">
+    <div class="flex flex-wrap items-center gap-1.5">
       <button
         v-for="c in presets"
         :key="c"
