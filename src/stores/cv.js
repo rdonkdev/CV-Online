@@ -206,42 +206,42 @@ function sampleData() {
       projects: true,
     },
     personal: {
-      name: 'Ana Marques',
+      name: 'Nélson Cossa',
       title: 'Frontend Developer',
-      email: 'ana.marques@email.com',
-      phone: '+351 912 345 678',
-      location: 'Lisboa, Portugal',
-      linkedin: 'linkedin.com/in/anamarques',
-      website: 'anamarques.dev',
+      email: 'nelson.cossa@email.com',
+      phone: '+258 84 123 4567',
+      location: 'Maputo, Moçambique',
+      linkedin: 'linkedin.com/in/nelsoncossa',
+      website: 'nelsoncossa.dev',
       summary:
-        'Developer frontend com 4 anos de experiência em Vue e React, focada em interfaces acessíveis e performance. Gosto de transformar problemas complexos em produtos simples de usar.',
+        'Developer frontend com 4 anos de experiência em Vue e React, focado em interfaces acessíveis e performance. Gosto de transformar problemas complexos em produtos simples de usar.',
     },
     experience: [
       {
         id: uid(),
-        company: 'TechNova',
+        company: 'Vodacom Moçambique',
         role: 'Frontend Developer',
         startDate: '2022-03',
         endDate: '',
         current: true,
         description:
-          'Liderei a migração do dashboard principal para Vue 3, reduzindo o tempo de carregamento em 40%.\nImplementei um design system reutilizado por 5 equipas.\nMentorei 2 developers júnior em boas práticas de frontend.',
+          'Liderei a migração do portal de autoatendimento para Vue 3, reduzindo o tempo de carregamento em 40%.\nImplementei um design system reutilizado por 5 equipas.\nMentorei 2 developers júnior em boas práticas de frontend.',
       },
       {
         id: uid(),
-        company: 'Webly',
+        company: 'UX Information Technologies',
         role: 'Junior Developer',
         startDate: '2020-06',
         endDate: '2022-02',
         current: false,
         description:
-          'Desenvolvi componentes de UI reutilizáveis e integrações com APIs REST.\nColaborei na adopção de testes automatizados no time.',
+          'Desenvolvi componentes de UI reutilizáveis e integrações com APIs REST.\nColaborei na adopção de testes automatizados na equipa.',
       },
     ],
     education: [
       {
         id: uid(),
-        institution: 'Universidade de Lisboa',
+        institution: 'Universidade Eduardo Mondlane',
         degree: 'Licenciatura',
         field: 'Engenharia Informática',
         startDate: '2017-09',
@@ -257,8 +257,8 @@ function sampleData() {
     ],
     languages: [
       { id: uid(), name: 'Português', level: 'Nativo' },
+      { id: uid(), name: 'Changana', level: 'Nativo' },
       { id: uid(), name: 'Inglês', level: 'Avançado' },
-      { id: uid(), name: 'Espanhol', level: 'Intermédio' },
     ],
     certifications: [
       { id: uid(), name: 'Professional Scrum Master I', issuer: 'Scrum.org', year: '2023' },
@@ -267,7 +267,7 @@ function sampleData() {
       {
         id: uid(),
         name: 'Gerador de CV',
-        link: 'github.com/anamarques/cv',
+        link: 'github.com/nelsoncossa/cv',
         description: 'App Vue 3 para criar CVs com export para PDF e múltiplos templates.',
       },
     ],
