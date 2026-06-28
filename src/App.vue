@@ -6,6 +6,7 @@
     >
       <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-y-2 px-4 py-3">
         <div class="flex items-center gap-2">
+          <Icon name="document" class="h-6 w-6 shrink-0 text-blue-600" />
           <h1 class="hidden text-lg font-bold text-gray-900 dark:text-gray-100 sm:block">
             CV - Online
           </h1>
@@ -14,8 +15,9 @@
 
         <div class="flex flex-wrap items-center justify-end gap-2">
           <!-- Indicador de gravação -->
-          <span class="hidden text-xs text-gray-400 sm:inline">
-            {{ saveState === 'saving' ? 'A guardar…' : 'Guardado ✓' }}
+          <span class="hidden items-center gap-1 text-xs text-gray-400 sm:inline-flex">
+            <template v-if="saveState === 'saving'">A guardar…</template>
+            <template v-else><Icon name="check" class="h-3.5 w-3.5" /> Guardado</template>
           </span>
 
           <!-- Undo / Redo -->
@@ -26,7 +28,7 @@
             aria-label="Anular"
             @click="undo"
           >
-            ↶
+            <Icon name="undo" class="h-4 w-4" />
           </button>
           <button
             class="icon-btn"
@@ -35,7 +37,7 @@
             aria-label="Refazer"
             @click="redo"
           >
-            ↷
+            <Icon name="redo" class="h-4 w-4" />
           </button>
 
           <!-- Modo escuro -->
@@ -45,7 +47,7 @@
             :aria-label="dark ? 'Modo claro' : 'Modo escuro'"
             @click="toggleDark"
           >
-            {{ dark ? '☀' : '🌙' }}
+            <Icon :name="dark ? 'sun' : 'moon'" class="h-4 w-4" />
           </button>
 
           <!-- Toggle mobile: formulário / preview -->
@@ -77,7 +79,7 @@
           <!-- Menu de ações secundárias (mantém o header limpo em mobile) -->
           <div class="relative">
             <button class="btn-ghost" :aria-expanded="menuOpen" @click="menuOpen = !menuOpen">
-              Ações ▾
+              Ações <Icon name="chevron-down" class="h-3.5 w-3.5" />
             </button>
             <!-- Backdrop para fechar ao clicar fora; itens do menu são botões (teclado ok). -->
             <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions, vuejs-accessibility/click-events-have-key-events -->
@@ -132,7 +134,9 @@
           v-if="cv.isEmpty"
           class="mb-3 rounded-xl border border-blue-200 bg-blue-50 p-4 text-sm dark:border-blue-900 dark:bg-blue-950"
         >
-          <p class="font-medium text-blue-800 dark:text-blue-200">👋 Bem-vindo!</p>
+          <p class="flex items-center gap-2 font-medium text-blue-800 dark:text-blue-200">
+            <Icon name="sparkles" class="h-4 w-4" /> Bem-vindo!
+          </p>
           <p class="mt-1 text-blue-700 dark:text-blue-300">
             Preenche os campos abaixo e vê o teu CV a montar-se ao lado em tempo real. Sem ideias?
             Carrega um exemplo para experimentares.
@@ -157,9 +161,14 @@
         </div>
 
         <FormWizard />
-        <p class="mt-3 px-1 text-center text-xs text-gray-400 dark:text-gray-500">
-          🔒 Os teus dados ficam apenas neste browser (localStorage) — nada é enviado para
-          servidores. Em computador partilhado, usa "Limpar tudo" ao terminar.
+        <p
+          class="mt-3 flex items-start justify-center gap-1.5 px-1 text-center text-xs text-gray-400 dark:text-gray-500"
+        >
+          <Icon name="lock" class="mt-0.5 h-3.5 w-3.5 shrink-0" />
+          <span>
+            Os teus dados ficam apenas neste browser (localStorage) — nada é enviado para
+            servidores. Em computador partilhado, usa "Limpar tudo" ao terminar.
+          </span>
         </p>
       </section>
 
@@ -214,6 +223,7 @@ import TemplatePicker from '@/components/TemplatePicker.vue'
 import ProfileSwitcher from '@/components/ProfileSwitcher.vue'
 import PrintPreviewModal from '@/components/PrintPreviewModal.vue'
 import ToastHost from '@/components/ToastHost.vue'
+import Icon from '@/components/Icon.vue'
 
 const cv = useCvStore()
 const profiles = useProfilesStore()

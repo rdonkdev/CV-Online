@@ -12,14 +12,14 @@
         }"
         role="status"
       >
-        <span>{{ icon(t.type) }}</span>
+        <Icon :name="iconName(t.type)" class="h-4 w-4 shrink-0" />
         <span>{{ t.message }}</span>
         <button
           class="ml-2 text-white/70 hover:text-white"
           aria-label="Fechar"
           @click="dismiss(t.id)"
         >
-          ×
+          <Icon name="x" class="h-3.5 w-3.5" />
         </button>
       </div>
     </transition-group>
@@ -28,11 +28,12 @@
 
 <script setup>
 import { useToasts } from '@/composables/useToasts'
+import Icon from '@/components/Icon.vue'
 
 const { toasts, dismiss } = useToasts()
 
-function icon(type) {
-  return type === 'success' ? '✓' : type === 'error' ? '⚠' : 'ℹ'
+function iconName(type) {
+  return type === 'success' ? 'check' : type === 'error' ? 'alert' : 'info'
 }
 </script>
 

@@ -37,7 +37,8 @@
                   : 'bg-gray-100 text-gray-400 dark:bg-gray-700 dark:text-gray-500'
             "
           >
-            {{ i < current ? '✓' : i + 1 }}
+            <Icon v-if="i < current" name="check" class="h-3.5 w-3.5" />
+            <template v-else>{{ i + 1 }}</template>
           </span>
           <span
             class="max-w-full truncate"
@@ -97,6 +98,7 @@ import StepSkills from '@/components/steps/StepSkills.vue'
 import StepLanguages from '@/components/steps/StepLanguages.vue'
 import StepCertifications from '@/components/steps/StepCertifications.vue'
 import StepProjects from '@/components/steps/StepProjects.vue'
+import Icon from '@/components/Icon.vue'
 
 const cv = useCvStore()
 const current = ref(0)

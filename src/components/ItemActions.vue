@@ -8,7 +8,7 @@
       aria-label="Mover para cima"
       @click="$emit('up')"
     >
-      ↑
+      <Icon name="chevron-up" class="h-3.5 w-3.5" />
     </button>
     <button
       type="button"
@@ -18,7 +18,7 @@
       aria-label="Mover para baixo"
       @click="$emit('down')"
     >
-      ↓
+      <Icon name="chevron-down" class="h-3.5 w-3.5" />
     </button>
     <button
       type="button"
@@ -31,6 +31,8 @@
 </template>
 
 <script setup>
+import Icon from '@/components/Icon.vue'
+
 defineProps({
   canUp: Boolean,
   canDown: Boolean,
