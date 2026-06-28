@@ -3,11 +3,11 @@
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
       <div>
         <label for="p-name" class="label">Nome completo</label>
-        <input id="p-name" v-model="p.name" class="input" placeholder="Nélson Cossa" />
+        <input id="p-name" v-model="p.name" class="input" placeholder="Aida Mucavele" />
       </div>
       <div>
         <label for="p-title" class="label">Título profissional</label>
-        <input id="p-title" v-model="p.title" class="input" placeholder="Frontend Developer" />
+        <input id="p-title" v-model="p.title" class="input" placeholder="Gestora de Marketing" />
       </div>
     </div>
 
@@ -22,7 +22,7 @@
           :class="{ 'border-red-400 focus:border-red-500 focus:ring-red-500': !emailValid }"
           :aria-invalid="!emailValid"
           aria-describedby="p-email-error"
-          placeholder="nelson@email.com"
+          placeholder="aida@email.com"
         />
         <p v-if="!emailValid" id="p-email-error" class="mt-1 text-xs text-red-500">
           Introduz um email válido.
@@ -45,14 +45,14 @@
           id="p-linkedin"
           v-model="p.linkedin"
           class="input"
-          placeholder="linkedin.com/in/nelson"
+          placeholder="linkedin.com/in/aida"
         />
       </div>
     </div>
 
     <div>
       <label for="p-website" class="label">Website / Portfolio</label>
-      <input id="p-website" v-model="p.website" class="input" placeholder="nelsoncossa.dev" />
+      <input id="p-website" v-model="p.website" class="input" placeholder="aidamucavele.com" />
     </div>
 
     <div>

@@ -206,36 +206,36 @@ function sampleData() {
       projects: true,
     },
     personal: {
-      name: 'Nélson Cossa',
-      title: 'Frontend Developer',
-      email: 'nelson.cossa@email.com',
+      name: 'Aida Mucavele',
+      title: 'Gestora de Marketing',
+      email: 'aida.mucavele@email.com',
       phone: '+258 84 123 4567',
       location: 'Maputo, Moçambique',
-      linkedin: 'linkedin.com/in/nelsoncossa',
-      website: 'nelsoncossa.dev',
+      linkedin: 'linkedin.com/in/aidamucavele',
+      website: 'aidamucavele.com',
       summary:
-        'Developer frontend com 4 anos de experiência em Vue e React, focado em interfaces acessíveis e performance. Gosto de transformar problemas complexos em produtos simples de usar.',
+        'Gestora de marketing com 4 anos de experiência em campanhas digitais e gestão de marca. Orientada a resultados e ao crescimento, gosto de transformar dados em decisões e ideias em campanhas com impacto.',
     },
     experience: [
       {
         id: uid(),
         company: 'Vodacom Moçambique',
-        role: 'Frontend Developer',
+        role: 'Gestora de Marketing',
         startDate: '2022-03',
         endDate: '',
         current: true,
         description:
-          'Liderei a migração do portal de autoatendimento para Vue 3, reduzindo o tempo de carregamento em 40%.\nImplementei um design system reutilizado por 5 equipas.\nMentorei 2 developers júnior em boas práticas de frontend.',
+          'Liderei campanhas digitais que aumentaram a captação de clientes em 35%.\nGeri o orçamento anual de marketing e uma equipa de 5 pessoas.\nImplementei dashboards de métricas que melhoraram a tomada de decisão.',
       },
       {
         id: uid(),
-        company: 'UX Information Technologies',
-        role: 'Junior Developer',
+        company: 'Cervejas de Moçambique (CDM)',
+        role: 'Coordenadora de Marketing',
         startDate: '2020-06',
         endDate: '2022-02',
         current: false,
         description:
-          'Desenvolvi componentes de UI reutilizáveis e integrações com APIs REST.\nColaborei na adopção de testes automatizados na equipa.',
+          'Coordenei o lançamento de 2 novos produtos no mercado nacional.\nGeri parcerias com agências e fornecedores, otimizando custos em 15%.',
       },
     ],
     education: [
@@ -243,17 +243,17 @@ function sampleData() {
         id: uid(),
         institution: 'Universidade Eduardo Mondlane',
         degree: 'Licenciatura',
-        field: 'Engenharia Informática',
+        field: 'Gestão de Marketing',
         startDate: '2017-09',
         endDate: '2020-07',
       },
     ],
     skills: [
-      { id: uid(), name: 'Vue 3', level: 5 },
-      { id: uid(), name: 'JavaScript', level: 5 },
-      { id: uid(), name: 'TypeScript', level: 4 },
-      { id: uid(), name: 'Tailwind CSS', level: 4 },
-      { id: uid(), name: 'Node.js', level: 3 },
+      { id: uid(), name: 'Marketing Digital', level: 5 },
+      { id: uid(), name: 'Gestão de Redes Sociais', level: 5 },
+      { id: uid(), name: 'Google Analytics', level: 4 },
+      { id: uid(), name: 'Copywriting', level: 4 },
+      { id: uid(), name: 'Gestão de Campanhas', level: 4 },
     ],
     languages: [
       { id: uid(), name: 'Português', level: 'Nativo' },
@@ -261,14 +261,20 @@ function sampleData() {
       { id: uid(), name: 'Inglês', level: 'Avançado' },
     ],
     certifications: [
-      { id: uid(), name: 'Professional Scrum Master I', issuer: 'Scrum.org', year: '2023' },
+      {
+        id: uid(),
+        name: 'Fundamentals of Digital Marketing',
+        issuer: 'Google',
+        year: '2023',
+      },
     ],
     projects: [
       {
         id: uid(),
-        name: 'Gerador de CV',
-        link: 'github.com/nelsoncossa/cv',
-        description: 'App Vue 3 para criar CVs com export para PDF e múltiplos templates.',
+        name: 'Campanha #OrgulhoMoçambique',
+        link: 'aidamucavele.com/casos',
+        description:
+          'Campanha digital multicanal de marca.\nAumentou o engagement em 60% e alcançou 1,2M de pessoas.',
       },
     ],
   }

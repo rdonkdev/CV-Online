@@ -30,7 +30,7 @@
             :id="`cert-name-${cert.id}`"
             v-model="cert.name"
             class="input"
-            placeholder="Professional Scrum Master I"
+            placeholder="Fundamentals of Digital Marketing"
           />
         </div>
         <div>
@@ -39,7 +39,7 @@
             :id="`cert-issuer-${cert.id}`"
             v-model="cert.issuer"
             class="input"
-            placeholder="Scrum.org"
+            placeholder="Google"
           />
         </div>
       </div>

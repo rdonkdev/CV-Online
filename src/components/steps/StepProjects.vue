@@ -25,7 +25,7 @@
             :id="`proj-name-${proj.id}`"
             v-model="proj.name"
             class="input"
-            placeholder="Gerador de CV"
+            placeholder="Campanha de lançamento"
           />
         </div>
         <div>
@@ -34,7 +34,7 @@
             :id="`proj-link-${proj.id}`"
             v-model="proj.link"
             class="input"
-            placeholder="github.com/nelsoncossa/projeto"
+            placeholder="aidamucavele.com/projeto"
           />
         </div>
       </div>

@@ -45,7 +45,7 @@
           :id="`edu-field-${edu.id}`"
           v-model="edu.field"
           class="input"
-          placeholder="Engenharia Informática"
+          placeholder="Gestão de Marketing"
         />
       </div>
 

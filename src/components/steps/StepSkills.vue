@@ -12,7 +12,7 @@
       <input
         v-model="skill.name"
         class="input min-w-[8rem] flex-1"
-        placeholder="ex.: Vue 3"
+        placeholder="ex.: Marketing Digital"
         aria-label="Nome da competência"
       />
 

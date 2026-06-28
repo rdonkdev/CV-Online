@@ -30,7 +30,7 @@
             :id="`exp-role-${exp.id}`"
             v-model="exp.role"
             class="input"
-            placeholder="Frontend Developer"
+            placeholder="Gestora de Marketing"
           />
         </div>
         <div>
@@ -86,7 +86,7 @@
           v-model="exp.description"
           rows="4"
           class="input resize-none"
-          placeholder="Uma linha por tópico — cada linha vira um bullet no CV.&#10;Ex.: Liderei a migração para Vue 3, -40% no tempo de carregamento.&#10;Criei um design system reutilizado por 5 equipas."
+          placeholder="Uma linha por tópico — cada linha vira um bullet no CV.&#10;Ex.: Liderei campanhas digitais, +35% na captação de clientes.&#10;Geri uma equipa de 5 pessoas e o orçamento anual."
         />
         <div class="mt-1 flex justify-between text-xs text-gray-400">
           <span>Dica: cada linha vira um tópico (bullet).</span>
