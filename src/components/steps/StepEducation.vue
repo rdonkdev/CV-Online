@@ -25,7 +25,7 @@
             :id="`edu-inst-${edu.id}`"
             v-model="edu.institution"
             class="input"
-            placeholder="Universidade de Lisboa"
+            placeholder="Universidade Eduardo Mondlane"
           />
         </div>
         <div>

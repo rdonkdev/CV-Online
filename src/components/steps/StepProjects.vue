@@ -34,7 +34,7 @@
             :id="`proj-link-${proj.id}`"
             v-model="proj.link"
             class="input"
-            placeholder="github.com/user/projeto"
+            placeholder="github.com/nelsoncossa/projeto"
           />
         </div>
       </div>

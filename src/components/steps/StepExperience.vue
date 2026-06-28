@@ -39,7 +39,7 @@
             :id="`exp-company-${exp.id}`"
             v-model="exp.company"
             class="input"
-            placeholder="TechNova"
+            placeholder="Vodacom Moçambique"
           />
         </div>
       </div>
