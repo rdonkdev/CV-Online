@@ -1,5 +1,5 @@
 <template>
-  <div class="relative">
+  <div ref="root" class="relative">
     <div class="flex items-center gap-1">
       <select
         class="max-w-[10rem] rounded-lg border border-gray-300 bg-white px-2 py-1.5 text-sm text-gray-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200"
@@ -10,9 +10,12 @@
         <option v-for="p in profiles.profiles" :key="p.id" :value="p.id">{{ p.name }}</option>
       </select>
       <button
+        ref="trigger"
         type="button"
         class="icon-btn"
         :aria-expanded="open"
+        aria-haspopup="dialog"
+        aria-controls="profile-panel"
         title="Gerir CVs"
         @click="toggle"
       >
@@ -23,11 +26,21 @@
     <!-- Painel de gestão -->
     <div
       v-if="open"
+      id="profile-panel"
+      ref="panel"
       class="absolute left-0 z-30 mt-1 w-64 rounded-lg border border-gray-200 bg-white p-3 shadow-lg dark:border-gray-700 dark:bg-gray-800"
+      role="dialog"
+      aria-label="Gerir CVs"
     >
       <label for="profile-name" class="label">Nome deste CV</label>
       <div class="flex gap-2">
-        <input id="profile-name" v-model="nameDraft" class="input" @keyup.enter="applyRename" />
+        <input
+          id="profile-name"
+          ref="nameInput"
+          v-model="nameDraft"
+          class="input"
+          @keyup.enter="applyRename"
+        />
         <button type="button" class="btn-ghost" @click="applyRename">Guardar</button>
       </div>
 
@@ -74,10 +87,13 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useProfilesStore } from '@/stores/profiles'
 
 const profiles = useProfilesStore()
+const root = ref(null)
+const trigger = ref(null)
+const nameInput = ref(null)
 const open = ref(false)
 const confirmingDelete = ref(false)
 const nameDraft = ref(profiles.activeName)
@@ -91,10 +107,34 @@ watch(
   }
 )
 
-function toggle() {
-  open.value = !open.value
-  if (open.value) nameDraft.value = profiles.activeName
+function openPanel() {
+  nameDraft.value = profiles.activeName
+  open.value = true
+  nextTick(() => nameInput.value?.focus())
 }
+
+function closePanel(restoreFocus = false) {
+  open.value = false
+  confirmingDelete.value = false
+  if (restoreFocus) trigger.value?.focus()
+}
+
+function toggle() {
+  if (open.value) closePanel()
+  else openPanel()
+}
+
+function onPointerDown(event) {
+  if (!open.value || root.value?.contains(event.target)) return
+  closePanel()
+}
+
+function onKeyDown(event) {
+  if (!open.value || event.key !== 'Escape') return
+  event.preventDefault()
+  closePanel(true)
+}
+
 function applyRename() {
   profiles.rename(profiles.activeId, nameDraft.value)
 }
@@ -110,4 +150,14 @@ function onDelete() {
   profiles.remove(profiles.activeId)
   confirmingDelete.value = false
 }
+
+onMounted(() => {
+  document.addEventListener('pointerdown', onPointerDown)
+  document.addEventListener('keydown', onKeyDown)
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener('pointerdown', onPointerDown)
+  document.removeEventListener('keydown', onKeyDown)
+})
 </script>

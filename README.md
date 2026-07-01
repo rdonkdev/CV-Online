@@ -76,21 +76,27 @@ npm run format    # Prettier
 ```
 src/
 ├── components/
-│   ├── steps/            → passos do formulário
+│   ├── steps/             → passos do formulário
 │   │   ├── StepPersonal.vue
 │   │   ├── StepExperience.vue
 │   │   ├── StepEducation.vue
 │   │   └── StepSkills.vue
-│   ├── templates/        → designs do CV
+│   ├── templates/         → 18 designs do CV registados em registry.js
 │   │   ├── TemplateModern.vue
 │   │   ├── TemplateClassic.vue
-│   │   └── TemplateMinimal.vue
-│   ├── FormWizard.vue    → wizard multi-step + progresso
-│   ├── CVPreview.vue     → escolhe e renderiza o template activo
+│   │   ├── TemplateMinimal.vue
+│   │   └── ...
+│   ├── FormWizard.vue     → wizard multi-step + progresso
+│   ├── CVPreview.vue      → escolhe e renderiza o template ativo
+│   ├── ProfileSwitcher.vue
 │   └── TemplatePicker.vue
-├── stores/cv.js          → estado central (Pinia) + persistência
-├── composables/usePdfExport.js
-├── App.vue               → layout (formulário | preview)
+├── stores/
+│   ├── cv.js              → estado de edição do CV
+│   └── profiles.js        → perfis e persistência
+├── composables/
+│   ├── useHistory.js      → undo/redo com debounce
+│   └── usePdfExport.js
+├── App.vue                → layout (formulário | preview)
 └── main.js
 ```
 
@@ -106,6 +112,13 @@ npm run deploy   # build + publish do dist para o branch gh-pages
 ```
 
 Por ser 100% estático, também corre tal-e-qual no Vercel ou Netlify.
+
+Por omissão, o build de produção usa `base: /CV-Online/` para GitHub Pages. Para
+outro domínio ou subdiretório, define `VITE_BASE_PATH` antes do build:
+
+```bash
+VITE_BASE_PATH=/ npm run build
+```
 
 ---
 
